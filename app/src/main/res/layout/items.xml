@@ -12,11 +12,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#77000000"
-        android:layout_alignBottom="@+id/image_item">
+        android:layout_alignBottom="@+id/image_item"
+        android:background="#77000000">
 
         <TextView
-            android:id="@+id/item_title"
+            android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -28,10 +28,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/item_description"
+            android:id="@+id/item_genres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/item_title"
+            android:layout_below="@id/item_name"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:text="Item description"
