@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MangaYomu</string>
+    <string name="search_bar">Search</string>
+    <string name="login">Login</string>
 </resources>
