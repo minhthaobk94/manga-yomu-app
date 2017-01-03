@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorNewTab">#2e7d32</color>
+    <color name="colorUpdatedTab">#ffa000</color>
+    <color name="colorPopularTab">#6a1b9a</color>
 </resources>

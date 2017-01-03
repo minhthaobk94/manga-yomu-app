@@ -26,7 +26,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:design:25.0.1'
     compile 'org.projectlombok:lombok:1.16.10'
     compile group: 'com.squareup.picasso', name: 'picasso', version: '2.4.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
     testCompile 'junit:junit:4.12'
 }

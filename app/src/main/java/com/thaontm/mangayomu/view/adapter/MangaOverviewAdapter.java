@@ -31,8 +31,8 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
         MangaOverviewHolder(View itemView) {
             super(itemView);
             imageManga = (ImageView) itemView.findViewById(R.id.image_item);
-            txtName = (TextView) itemView.findViewById(R.id.item_title);
-            txtGenres = (TextView) itemView.findViewById(R.id.item_description);
+            txtName = (TextView) itemView.findViewById(R.id.item_name);
+            txtGenres = (TextView) itemView.findViewById(R.id.item_genres);
         }
     }
 
