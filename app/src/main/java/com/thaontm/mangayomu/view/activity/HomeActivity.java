@@ -1,7 +1,11 @@
 package com.thaontm.mangayomu.view.activity;
 
 import android.app.SearchManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,72 +14,58 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.view.adapter.MangaOverviewAdapter;
+import com.thaontm.mangayomu.view.adapter.ViewPagerAdapter;
+import com.thaontm.mangayomu.view.fragment.AFagment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Data;
 
 public class HomeActivity extends AppCompatActivity {
     private List<MangaOverview> mangaOverviewList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MangaOverviewAdapter mangaOverviewAdapter;
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
+    private ViewPager mViewPager;
+    private ViewPagerAdapter mAdapter;
+    private TabLayout mTabLayout;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /*
-        Toolbar with Search and Login button
-         */
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(mToolbar);
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        /*
-        Recycler View with sample data
-         */
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new AFagment());
+        fragments.add(new AFagment());
+        fragments.add(new AFagment());
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
+        mViewPager.setAdapter(mAdapter);
 
-        mangaOverviewAdapter = new MangaOverviewAdapter(mangaOverviewList, this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mangaOverviewAdapter);
-
-        MangaOverview overview = new MangaOverview();
-        overview.setPreviewImageUrl("http://ibdp.huluim.com/video/12816667?size=320x180");
-        overview.setName("One Piece");
-        overview.setGenres("Phieu luu");
-        mangaOverviewList.add(overview);
-
-        MangaOverview overview1 = new MangaOverview();
-        overview1.setPreviewImageUrl("http://ibdp.huluim.com/video/12816667?size=320x180");
-        overview1.setName("Naruto");
-        overview1.setGenres("Phieu luu");
-        mangaOverviewList.add(overview1);
-
-        MangaOverview overview2 = new MangaOverview();
-        overview2.setPreviewImageUrl("http://ibdp.huluim.com/video/12816667?size=320x180");
-        overview2.setName("Naruto");
-        overview2.setGenres("Phieu luu");
-        mangaOverviewList.add(overview2);
-
+        mTabLayout.setupWithViewPager(mViewPager);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_bar_menu, menu);
-        /*
-        Tao SearchView va plugin vao trong SearchManager
-         */
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search_bar));
+
+        searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.search_bar));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -92,4 +82,5 @@ public class HomeActivity extends AppCompatActivity {
         });
         return true;
     }
+
 }
