@@ -43,7 +43,7 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
 
     @Override
     public MangaOverviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_manga, parent, false);
         return new MangaOverviewHolder(view);
     }
 
