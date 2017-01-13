@@ -1,6 +1,7 @@
 package com.thaontm.mangayomu.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
+import com.thaontm.mangayomu.view.activity.HomeActivity;
+import com.thaontm.mangayomu.view.activity.MangaDetailActivity;
 
 import java.util.List;
 
@@ -33,6 +36,14 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
             imageManga = (ImageView) itemView.findViewById(R.id.image_item);
             txtName = (TextView) itemView.findViewById(R.id.item_name);
             txtGenres = (TextView) itemView.findViewById(R.id.item_genres);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MangaDetailActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
