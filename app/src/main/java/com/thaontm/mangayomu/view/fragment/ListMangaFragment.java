@@ -12,11 +12,9 @@ import android.view.ViewGroup;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.model.dao.SqlLiteDbHelper;
-import com.thaontm.mangayomu.model.engine.MangaOverviewService;
 import com.thaontm.mangayomu.view.adapter.MangaOverviewAdapter;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,25 +25,27 @@ import java.util.List;
 public class ListMangaFragment extends Fragment {
     RecyclerView recyclerView;
     private MangaOverviewAdapter mangaOverviewAdapter;
-    private SqlLiteDbHelper mSqlLiteDbHelper;
     private List<MangaOverview> mMangas;
 
-    private static final String MANGA_RESOUCE_URL = "http://kissmanga.com/";
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        mMangas = bundle.getParcelableArrayList("LIST_MANGA");
+        Collections.shuffle(mMangas);
+    }
+
+    public void notifyDataSetChanged() {
+        if (recyclerView != null) {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.reccycler_view, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycle_view);
-        //List<MangaOverview> mangaOverviewList = new ArrayList<>();
-        /*for (int i = 0; i < 100; i++) {
-            MangaOverview mangaOverview = new MangaOverview();
-            mangaOverview.setPreviewImageUrl("http://ibdp.huluim.com/video/12816667?size=320x180");
-            mangaOverview.setName("Name " + i);
-            mangaOverview.setGenres("Genres " + i);
-            mangaOverviewList.add(mangaOverview);
-        }*/
-        initData();
         mangaOverviewAdapter = new MangaOverviewAdapter(mMangas, getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -55,10 +55,4 @@ public class ListMangaFragment extends Fragment {
         return view;
     }
 
-    public void initData(){
-        // mSqlLiteDbHelper = new SqlLiteDbHelper(getActivity());
-        // mSqlLiteDbHelper.openDataBase();
-        MangaOverviewService service = new MangaOverviewService();
-        mMangas = service.fetchMangaOverviews(MANGA_RESOUCE_URL);
-    }
 }

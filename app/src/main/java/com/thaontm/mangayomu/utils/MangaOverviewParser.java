@@ -1,10 +1,10 @@
 package com.thaontm.mangayomu.utils;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class MangaOverviewParser {
 
@@ -49,5 +49,4 @@ public class MangaOverviewParser {
 		}
 		return genres;
 	}
-
 }

@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0021)http://kissmanga.com/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+KissManga - Read manga online in high quality
+</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta property="fb:admins" content="683024937"><meta property="fb:app_id" content="111670815619329">
+<script src="./kissmanga_files/cb=gapi.loaded_1" async=""></script><script src="./kissmanga_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./kissmanga_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./kissmanga_files/ga.js"></script><script src="./kissmanga_files/jquery17.min.js" type="text/javascript"></script>
+ 
+<link href="./kissmanga_files/tpl_style.css" rel="stylesheet" type="text/css">
+<link href="./kissmanga_files/upload-progress.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="http://kissmanga.com/Content/images/favicon.ico" type="image/x-icon">
+<!--[if IE 6]><link href="http://kissmanga.com/Content/css/tpl_ie_6.css"  rel="stylesheet" type="text/css" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="http://kissmanga.com/Content/css/tpl_ie_7.css" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" type="text/css" href="http://kissmanga.com/Content/css/tpl_ie_7.css" /><![endif]-->
+<meta name="description" content="Read manga online in high quality for free, fast update, daily update. Unique reading type: All pages - just need to scroll to read next page, and many more...">
+<meta name="keywords" content="manga,read manga,manga online,manga scans,manga volume,manga chapter,online manga,read free manga,free manga,read free manga online,manga viewer,manga download,manga downloads,japanese comic, manhwa online">
+<link rel="stylesheet" href="./kissmanga_files/jquery.ui.all.css">
+<script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-1712467-9']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+<script src="./kissmanga_files/kmn_i3_c.js"></script></head>
+<body>
+<div id="containerRoot">
+<div id="head">
+<h3>
+<div style="position: relative; text-align: right; margin: -40px 46px 20px 0px; font: bold 13px Arial;">
+<div id="topHolderBox" style="width: 230px; height: 27px;">
+<img src="./kissmanga_files/user-small.png" style="vertical-align: middle; margin-bottom: 5px">
+<a href="http://kissmanga.com/Login">Login</a> or <a href="http://kissmanga.com/Register">
+Register</a>
+</div>
+</div>
+<div id="search" style="position: relative">
+<form id="formSearch" method="post">
+<p>
+<input size="40" id="keyword" name="keyword" value="" class="text" autocomplete="off">
+<select id="selectSearch">
+<option value="Manga">Series Name</option>
+<option value="AuthorArtist">Author/Artist</option>
+</select>
+<input id="imgSearch" type="image" src="./kissmanga_files/search.png" class="button" onclick="return false;">
+</p>
+<div id="result_box" style="display: none; margin-top: -3px; max-height: 300px; overflow-y: auto; overflow-x: hidden;">
+</div>
+<div style="float: left; width: 250px; text-align: left; margin-left: 2px">
+<div style="float: left; width: 90px">
+<iframe src="./kissmanga_files/like.html" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 100px;
+                                height: 21px;" allowtransparency="true"></iframe>
+</div>
+<div style="float: left; width: 85px">
+ 
+<div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1484596702425" name="I0_1484596702425" src="./kissmanga_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div>
+ 
+<script type="text/javascript">
+                                (function () {
+                                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                    po.src = 'https://apis.google.com/js/plusone.js';
+                                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                })();
+                            </script>
+</div>
+</div>
+<div style="margin: 10px 48px 10px 0">
+<a href="http://kissmanga.com/AdvanceSearch">
+<img src="./kissmanga_files/read.png" width="16px" border="0" style="vertical-align: middle">&nbsp;&nbsp;Advanced
+Search</a>
+</div>
+</form>
+</div>
+<script type="text/javascript">
+                    $('#imgSearch').click(function () {
+                        Submit();
+                    });
+
+                    var delay = (function () {
+                        var timer = 0;
+                        return function (callback, ms) {
+                            clearTimeout(timer);
+                            timer = setTimeout(callback, ms);
+                        };
+                    })();
+
+                    $('#keyword').keyup(function () {
+                        delay(function () {
+                            Suggest();
+                        }, 500);
+                    });
+
+                    $('#selectSearch').change(function () {
+                        Suggest();
+                    });
+
+                    $("#selectSearch option").each(function () {
+                        var url = location.href;
+                        if (url.indexOf($(this).attr('value')) != -1)
+                            $(this).attr("selected", "selected");
+                    });
+
+                    function Submit() {
+                        if ($.trim($('#keyword').val()).length < 2) {
+                            $('#keyword').blur();
+                            alert('Keyword must be more than one character!');
+                        }
+                        else {
+                            $("#formSearch").attr('action', "http://kissmanga.com/Search/" + $('#selectSearch').val());
+                            $("#formSearch").submit();
+                        }
+                    }
+
+                    function Suggest() {
+                        var keyword = $.trim($('#keyword').val());
+                        if (keyword != "" && $.trim($('#keyword').val()).length > 2) {
+                            $('#result_box').html("<span id='loader'></span>");
+                            $('#result_box').css('display', 'block');
+                            $.ajax(
+                            {
+                                type: "POST",
+                                url: "/Search/SearchSuggest",
+                                data: "type=" + $('#selectSearch').val() + '&keyword=' + keyword,
+                                success: function (message) {
+                                    if (message != "") {
+                                        message += '<a href="#" onclick="return false;">---------------</a>';
+                                        message += '<a href="#" onclick="return false;">PRESS ENTER TO SEARCH MORE...</a>';
+
+                                        $('#result_box').html(message);
+                                    }
+                                    else {
+                                        $('#result_box').html('<a href="#" onclick="return false;">Press Enter to search...</a>');
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            $('#result_box').html('');
+                            $('#result_box').css('display', 'none');
+                        }
+                    }
+                </script>
+</h3>
+<h1>
+<a href="http://kissmanga.com/" title="Read manga online - kissmanga.com" class="logo">Read online manga - kissmanga.com</a></h1>
+</div>
+ 
+<div class="clear">
+</div>
+<div id="headnav">
+<div id="navbar">
+<div id="navcontainer">
+<ul>
+<li id="liHome"><a href="http://kissmanga.com/" id="currentTab">Home</a></li>
+<li id="liDS"><a href="http://kissmanga.com/MangaList">Manga
+List</a></li>
+<li id="liComic"><a target="_blank" href="http://readcomiconline.to/">Comic
+List</a></li>
+<li id="liReport"><a rel="nofollow" target="_blank" href="https://www.facebook.com/messages/KissManga">
+Report Error</a></li>
+<li id="liRequest"><a href="http://kissmanga.com/Message/RequestManga">
+Request Manga</a></li>
+<li id="liCommunity"><a rel="nofollow" target="_blank" href="http://forum.kissanime.com/">
+Forum</a></li>
+<li id="liAnimeOnline"><a target="_blank" title="High quality anime online" href="http://kissanime.ru/">
+Watch anime</a></li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+    var path = 'Home';
+    var action = 'Index';
+    if (path == 'Home')
+        $('#liHome a').attr('id', 'currentTab');
+    else if (path == 'Manga' || path == 'Genre' || path == 'Group' || path == 'AuthorArtist')
+        $('#liDS a').attr('id', 'currentTab');
+    else if (action == 'Report')
+        $('#liReport a').attr('id', 'currentTab');
+    else if (action == 'RequestManga')
+        $('#liRequest a').attr('id', 'currentTab');
+    else if (action == 'Guide')
+        $('#liGuide a').attr('id', 'currentTab')
+    else
+        $('#navcontainer a[href*="' + path + '"]').attr('id', 'currentTab');
+</script>
+<div id="navsubbar">
+<p>
+<a href="http://kissmanga.com/Register/Member">Register</a>
+</p>
+</div>
+</div>
+ 
+<script src="./kissmanga_files/customjavascript.js" type="text/javascript"></script>
+<script src="./kissmanga_files/jquery.tools.min.js" type="text/javascript"></script>
+<div id="container">
+<div id="leftside">
+<div class="clear">
+</div>
+<div class="banner">
+ 
+<div class="details">
+<a href="http://kissmanga.com/Manga/Dragon-Quest-Emblem-of-Roto">
+<img width="150px" height="195px" src="./kissmanga_files/4498572-EnM-DQ-EoR_v01_c01_cover.jpg"></a>
+<div style="float: left; width: 530px">
+<a class="bigChar" href="http://kissmanga.com/Manga/Dragon-Quest-Emblem-of-Roto">Dragon Quest Emblem of Roto</a>
+<p>
+<span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a>
+</p>
+<p>
+Many years after the fall of Zoma, the descendants of Roto left Alefgard and divided his emblem into two parts. The brother with the top half, created the kingdom of Loran. The brother with the bottom ...
+</p>
+</div>
+</div>
+ 
+</div>
+ 
+<div id="divAds2" style="text-align: center; overflow: hidden; width: 728px">
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="./kissmanga_files/adprotect728.html" width="728px" height="90px">
+</iframe>
+</div>
+<div class="clear2">
+</div>
+<div class="bigBarContainer">
+<div class="barTitle">
+<div class="scrollable_title">
+Latest update</div>
+<div id="recently-nav">
+<a class="prev disabled"></a>
+<div class="navi">
+Page 1
+</div>
+<a class="next"></a>
+<div class="clear">
+</div>
+</div>
+<div class="clear">
+</div>
+</div>
+<div class="barContent">
+<div class="arrow-general">
+&nbsp;</div>
+<div class="scrollable">
+<div class="items">
+<div><a href="http://kissmanga.com/Manga/Fate-Extra-Mikon-Kyasuko-chan" title="Vol.005 Ch.030: Gawain VS Karna 001"><img width="130px" height="150px" src="./kissmanga_files/5276232img000002.jpg"><br>Fate/Extra - Mikon! Kyasuko-chan!?<br><span class="textDark">Vol.005 Ch.030: Gawain VS Karna 001</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Star-Martial-God-Technique" title="Ch.031: Star Flame Blade"><img width="130px" height="150px" src="./kissmanga_files/975582e237f5ad.jpg"><br>Star Martial God Technique<br><span class="textDark">Ch.031: Star Flame Blade</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Ayakashi-Utahime-Karuta" title="Vol.001 Ch.005: Song Of Demon Slaying (Part 001)"><img width="130px" height="150px" src="./kissmanga_files/702414243274fa.jpg"><br>Ayakashi Utahime Karuta<br><span class="textDark">Vol.001 Ch.005: Song Of Demon Slaying (Part 001)</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Kimi-wa-Ore-ga-Suki-Datte-Ittara-Donna-Kao-Suru-Darou" title="Ch.002"><img width="130px" height="150px" src="./kissmanga_files/7145429b03c1.jpg"><br>Kimi wa, Ore ga Suki Datte Ittara Donna Kao Suru Darou.<br><span class="textDark">Ch.002</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Yaoguai-Mingdan" title="Ch.243: Random Door"><img width="130px" height="150px" src="./kissmanga_files/6650152i206492.jpg"><br>Yaoguai Mingdan<br><span class="textDark">Ch.243: Random Door</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Yakushoku-Distpiari-Gesellshaft-Blue" title="Vol.004 Ch.024: Information, Steel Frames, Fastidiousness, and Decoration"><img width="130px" height="150px" src="./kissmanga_files/7204421602a.jpg"><br>Yakushoku Distpiari - Gesellshaft Blue<br><span class="textDark">Vol.004 Ch.024: Information, Steel Frames, Fastidiousness, and Decoration</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Fire-Punch" title="Ch.035"><img width="130px" height="150px" src="./kissmanga_files/9690732f6fcd.jpg"><br>Fire Punch<br><span class="textDark">Ch.035</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Touken-Ranbu-Anthology-SQEX-Formation" title="Vol.001 Ch.004: First Time at Horsekeeping / Irohe"><img width="130px" height="150px" src="./kissmanga_files/833007282ee94c.jpg"><br>Touken Ranbu Anthology ~ SQEX Formation ~<br><span class="textDark">Vol.001 Ch.004: First Time at Horsekeeping / Irohe</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Dalbic-Jogaksa" title="Chapter 081"><img width="130px" height="150px" src="./kissmanga_files/1833092e96ff356.jpg"><br>The Legendary Moonlight Sculptor<br><span class="textDark">Chapter 081</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Kimetsu-no-Yaiba" title="Ch.045: Joint Trial of the Demon Hunter Pillars"><img width="130px" height="150px" src="./kissmanga_files/130282207ac16e.jpg"><br>Kimetsu no Yaiba<br><span class="textDark">Ch.045: Joint Trial of the Demon Hunter Pillars</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Mousou-Telepathy" title="Ch.104: Digging a Deeper Grave"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/10-3-2016/340291227ada155.jpg" page="3"><br>Mousou Telepathy<br><span class="textDark">Ch.104: Digging a Deeper Grave</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/unTOUCHable" title="Chapter 129"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-2-2014/5403142BB894.jpg" page="3"><br>unTOUCHable<br><span class="textDark">Chapter 129</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Tenkuu-Shinpan" title="Episode 153"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/3-13-2014/9294861i172706.jpg" page="3"><br>Tenkuu Shinpan<br><span class="textDark">Episode 153</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Aisopos" title="Chapter 121"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/5-5-2015/5562642i202174.jpg" page="3"><br>Aisopos<br><span class="textDark">Chapter 121</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Oh-Lord-Jesus" title="Chapter 016"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-27-2015/1195952d02a8a32a935.jpg" page="3"><br>Oh! Lord Jesus<br><span class="textDark">Chapter 016</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Yami-no-Kodou" title="Vol.025 Ch.100"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-11-2011/4660482Yami_no_Kodou_v01__cover.jpg" page="4"><br>Yami no Kodou<br><span class="textDark">Vol.025 Ch.100</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Amalgam-of-Distortion" title="Vol.003 Ch.011: Chapter 011"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-23-2016/5250722334536f1.jpg" page="4"><br>Amalgam of Distortion<br><span class="textDark">Vol.003 Ch.011: Chapter 011</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Yuragi-sou-no-Yuuna-san" title="Ch.046: Yuna-san and the New Morning"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/4-3-2016/9852202i231084.jpg" page="4"><br>Yuragi-sou no Yuuna-san<br><span class="textDark">Ch.046: Yuna-san and the New Morning</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Minato-Machi-Neko-Machi" title="Vol.001 Ch.004: Ms. Kano&#39;s Sleeping Lover"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-4-2016/544785233560e722.jpg" page="4"><br>Minato Machi Neko Machi<br><span class="textDark">Vol.001 Ch.004: Ms. Kano's Sleeping Lover</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Takeda-Shingen-YOKOYAMA-Mitsuteru" title="Vol.007 Ch.054"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/4-16-2013/6790192c59db8f03b6f4e3d3ed7ddf721ef5e8d.jpg" page="4"><br>Takeda Shingen (YOKOYAMA Mitsuteru)<br><span class="textDark">Vol.007 Ch.054</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Working" title="Vol.010 Ch.187.006: Nazuna Chapter"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/9-12-2011/165144201_000a.jpg" page="5"><br>Working<br><span class="textDark">Vol.010 Ch.187.006: Nazuna Chapter</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Gokusai" title="Vol.001 Ch.005: Art.005- The Cursed Painting"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/10-25-2013/24456421e58aa830fc398991c9cc4c288240011.jpg" page="5"><br>Gokusai<br><span class="textDark">Vol.001 Ch.005: Art.005- The Cursed Painting</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Knights-Magic" title="Ch.012"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/9-18-2016/4351472c70d195.jpg" page="5"><br>Knights &amp; Magic<br><span class="textDark">Ch.012</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Pin-to-Kona" title="Vol.003 Ch.010"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/8-1-2012/4462232i80679.jpg" page="5"><br>Pin to Kona<br><span class="textDark">Vol.003 Ch.010</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Ibitsu-OKADA-Kazuto" title="vol.006 ch.052"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/4-22-2014/9632981i153199.jpg" page="5"><br>Ibitsu (OKADA Kazuto)<br><span class="textDark">vol.006 ch.052</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Hahri-s-Lumpy-Boardhouse" title="ch.026"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/10-14-2016/8245902b54af79.jpg" page="6"><br>Hahri's Lumpy Boardhouse<br><span class="textDark">ch.026</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Koukaku-Kidoutai-2" title="vol.001 ch.006"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/8-18-2014/8975452i88042.jpg" page="6"><br>Koukaku Kidoutai 2<br><span class="textDark">vol.001 ch.006</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Forever-Mine" title="ch.006"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/1-15-2017/5284912forever-mine.jpg" page="6"><br>Forever Mine<br><span class="textDark">ch.006</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Bastard-s-Dead-Man" title="ch.011"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/10-3-2016/66353728a4ac06c.jpg" page="6"><br>Bastard's Dead Man<br><span class="textDark">ch.011</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Tower-of-God" title="[Season 002] Ep. 233"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/8-17-2011/7743252cad0e.jpg" page="6"><br>Tower of God<br><span class="textDark">[Season 002] Ep. 233</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Wind-Breaker" title="vol.002 ch.108"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-21-2013/868836293e851ab9058f01b7eab287108e1cbdd.jpg" page="7"><br>Wind Breaker<br><span class="textDark">vol.002 ch.108</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Kuro-no-Tantei" title="Vol.007 Ch.030: Case 030. The End and A Beginning [Final]"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/7-19-2014/7956529c7fd2a2941f4ca3070b7ef2dc7f4692.jpg" page="7"><br>Kuro no Tantei<br><span class="textDark">Vol.007 Ch.030: Case 030. The End and A Beginning [Final]</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Trump-LEE-Chae-Eun" title="vol.002 ch.137"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/3-6-2013/3311712038866a7b82c263189a5f9d52234698f.jpg" page="7"><br>Trump (LEE Chae-Eun)<br><span class="textDark">vol.002 ch.137</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Hive" title="vol.003 ch.145"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/5-2-2014/30756521ab7e945aef464b02f03af5620cac49e.jpg" page="7"><br>Hive<br><span class="textDark">vol.003 ch.145</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Good-Robot" title="Vol.001 Ch.007 Read Online"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/2-25-2014/8372031b954d812159c4f636595b06b2bdea598.jpg" page="7"><br>Good Robot<br><span class="textDark">Vol.001 Ch.007 Read Online</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Full-Ahead-Coco" title="Vol.018 Ch.159: Carapace"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/10-30-2011/941262Full_Ahead-_Coco-v01-p000a.jpg" page="8"><br>Full Ahead Coco<br><span class="textDark">Vol.018 Ch.159: Carapace</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Bastard-HWANG-Youngchan" title="Ep. 084"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-25-2015/7591252i217243.jpg" page="8"><br>Bastard (HWANG Youngchan)<br><span class="textDark">Ep. 084</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Kikou-Shoujo-wa-Kizutsukanai" title="Ch.051.005: &quot;Extra Story&quot;"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-17-2011/692276266a1cb7bd495c4503a0a2d251fa0f5be.jpg" page="8"><br>Kikou Shoujo wa Kizutsukanai<br><span class="textDark">Ch.051.005: "Extra Story"</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/The-Descending-Moon-at-the-Foot-of-the-Mountain" title="Ch.000b"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/1-8-2017/7275622eba5f5.jpg" page="8"><br>The Descending Moon at the Foot of the Mountain<br><span class="textDark">Ch.000b</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Tsurezure-Children" title="Vol.003 Ch.045.006: Plus! Two (Omake)"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/7-23-2015/867737258bdc95.jpg" page="8"><br>Tsurezure Children<br><span class="textDark">Vol.003 Ch.045.006: Plus! Two (Omake)</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Pinks" title="Ch.003"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-5-2016/4701652839458ea5.jpg" page="9"><br>Pinks<br><span class="textDark">Ch.003</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Sensei-Lock-On" title="Vol.002 Ch.018"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-21-2014/4701232bb523.jpg" page="9"><br>Sensei Lock On!<br><span class="textDark">Vol.002 Ch.018</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Red-Storm" title="Chapter. 226 - Chapter 226"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/5-10-2013/992294262b959a499df34e7596bd1cbb5670519.jpg" page="9"><br>Red Storm<br><span class="textDark">Chapter. 226 - Chapter 226</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Gegege-no-Kitaro" title="Vol.008 Ch.008: Kasa-Jizo"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-8-2011/6993602a249ba9bfa967f0fc2e22f1ecd198061.jpg" page="9"><br>Gegege no Kitaro<br><span class="textDark">Vol.008 Ch.008: Kasa-Jizo</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Seitokai-Yakuindomo" title="393"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/12-3-2011/28955625b8d04cf91b7f0dfdb3ed8c688bc6d60.jpg" page="9"><br>Seitokai Yakuindomo<br><span class="textDark">393</span></a>&nbsp;&nbsp;&nbsp;</div><div><a href="http://kissmanga.com/Manga/Sui-Youbi" title="023"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/4-25-2015/82006725db0de3.jpg" page="10"><br>Sui Youbi<br><span class="textDark">023</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Zero-no-Chukaima-Yo-chien-Nano" title="Vol.001 Ch.002"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/1-10-2017/3105272659293a01.jpg" page="10"><br>Zero no Chukaima - Yo-chien Nano!<br><span class="textDark">Vol.001 Ch.002</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Ties-of-Compassion" title="ch.115.005"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/3-11-2012/5381421.jpg" page="10"><br>Ties of Compassion<br><span class="textDark">ch.115.005</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Survival" title="Vol.005 Ch.069: Danger 005"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/11-10-2015/3769961survival.jpg" page="10"><br>Survival<br><span class="textDark">Vol.005 Ch.069: Danger 005</span></a>&nbsp;&nbsp;&nbsp;<a href="http://kissmanga.com/Manga/Robotics-Notes-Revival-Legacy" title="Vol.003 Ch.012:  Black &amp; White"><img width="130px" height="150px" srctemp="http://kissmanga.com/Uploads/Etc/3-5-2014/449968121c16ac6b800a680f5310bb4be35cb2d.jpg" page="10"><br>Robotics;Notes - Revival Legacy<br><span class="textDark">Vol.003 Ch.012: Black &amp; White</span></a>&nbsp;&nbsp;&nbsp;</div>
+</div>
+<div class="clear">
+</div>
+</div>
+<script type="text/javascript">
+                        $(".scrollable").scrollable();
+                        var api = $(".scrollable").data("scrollable");
+
+                        $(".prev").click(function () {
+                            DoPrev();
+                        });
+
+                        function DoPrev() {
+                            if (scrollPage > 1) {
+                                scrollPage -= 1;
+                                SetScrollPage();
+                            }
+                        }
+
+                        $(document).keydown(function (e) {
+                            if (e.keyCode == 37) {
+                                DoPrev();
+                            }
+                            else if (e.keyCode == 39) {
+                                GoNext($(".next"));
+                            }
+                        });
+
+
+                        $(".next").click(function () {
+                            GoNext($(this));
+                        });
+
+
+                        var scrollPage = 1;
+                        function SetScrollPage() {
+                            $('.navi').html('Page ' + scrollPage);
+                        }
+
+                        function GoNext(nextVar) {
+                            var nextEle = nextVar;
+                            nextEle.hide();
+
+                            if (scrollPage < api.getSize()) {
+                                scrollPage += 1;
+                                SetScrollPage();
+                            }
+
+                            var aCurrPage = $('.items div > a img[page=' + (scrollPage + 1) + ']');
+                            aCurrPage.each(function () {
+                                $(this).attr('src', $(this).attr('srcTemp'));
+                            });
+
+                            if (api.getSize() == scrollPage) {
+                                var numItems = $('.items div > a').size();
+                                $.ajax({
+                                    url: '/Home/GetNextUpdatedManga',
+                                    type: "POST",
+                                    dataType: "html",
+                                    data: { id: numItems, page: scrollPage },
+                                    beforeSend: function () {
+                                        $(".ajxloading").css({ "bottom": "0" }).show();
+                                    },
+                                    success: function (dataResponse, textStatus) {
+                                        if (dataResponse != "") {
+                                            api.addItem(dataResponse);
+                                            if (api.getSize() == api.getIndex() + 1) // last div
+                                                api.next();
+
+                                            var aCurrPage = $('.items div > a img[page=' + (scrollPage + 1) + ']');
+                                            aCurrPage.each(function () {
+                                                $(this).attr('src', $(this).attr('srcTemp'));
+                                            });
+                                        }
+
+                                        nextEle.show();
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                                    },
+                                    complete: function (XMLHttpRequest, textStatus) {
+
+                                    }
+                                }); // end ajax
+                            }
+                            else
+                                nextEle.show();
+                        }
+                    </script>
+</div>
+</div>
+<div class="clear2">
+</div>
+<div id="submenu">
+<div id="tabmenucontainer">
+<ul>
+<li><a href="javascript:void(0);" id="liNewesttab" title="New manga" onclick="showTabData(&#39;newest&#39;)" class="tabactive" style="background-position: 0% 0px; line-height: 24px;">New manga</a></li>
+<li><a href="javascript:void(0);" id="liMostViewtab" title="Most popular manga" onclick="showTabData(&#39;mostview&#39;)" class="" style="background-position: 0% -25px; line-height: 24px;">
+Most popular manga</a></li>
+</ul>
+</div>
+ 
+<div class="clear">
+</div>
+<div id="subcontent">
+<div id="tab-newest" style="display: block;">
+<div style="position:relative"><a href="http://kissmanga.com/Manga/Sakasama-Cranberry"><img width="80px" height="100px" src="./kissmanga_files/97453621f3f6.jpg"></a><a href="http://kissmanga.com/Manga/Sakasama-Cranberry"><span class="title">Sakasama Cranberry</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Romance" class="dotUnder" title="Any love related story.  We will define love as between man and woman in  this case. Other than that, it is up to your own imagination of what  love is.">Romance</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shoujo" class="dotUnder" title="A work intended and primarily written for females.  Usually involves a  lot of romance and strong character development.">Shoujo</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Sakasama-Cranberry/ch-001?id=343103" title="Read Online Sakasama Cranberry ch.001">ch.001</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/1.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Forever-Mine"><img width="80px" height="100px" src="./kissmanga_files/5284912forever-mine.jpg"></a><a href="http://kissmanga.com/Manga/Forever-Mine"><span class="title">Forever Mine</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Romance" class="dotUnder" title="Any love related story.  We will define love as between man and woman in  this case. Other than that, it is up to your own imagination of what  love is.">Romance</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Forever-Mine/ch-006?id=343203" title="Read Online Forever Mine ch.006">ch.006</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/2.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/God-Eater-Side-by-Side"><img width="80px" height="100px" src="./kissmanga_files/7956032i220571.jpg"></a><a href="http://kissmanga.com/Manga/God-Eater-Side-by-Side"><span class="title">God Eater - Side by Side</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Sci-fi" class="dotUnder" title="Short for science fiction, these works involve twists on technology and  other science related phenomena which are contrary or stretches of the  modern day scientific world.">Sci-fi</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Seinen" class="dotUnder" title="Seinen means young Man. Manga and anime that specifically targets  young adult males around the ages of 18 to 25 are seinen titles.The  stories in seinen works appeal to university students and those in the  working world. Typically the story lines deal with the issues of  adulthood.">Seinen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/God-Eater-Side-by-Side/ch-011?id=343086" title="Read Online God Eater - Side by Side ch.011">ch.011</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/3.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Alice-KOMURA-Ayumi"><img width="80px" height="100px" src="./kissmanga_files/8091882i249093.jpg"></a><a href="http://kissmanga.com/Manga/Alice-KOMURA-Ayumi"><span class="title">Alice (KOMURA Ayumi)</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shoujo-Ai" class="dotUnder" title="Often synonymous with yuri, this can be thought of as somewhat less  extreme. Girl&#39;s Love, so to speak.">Shoujo Ai</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Alice-KOMURA-Ayumi/Ch-000---Oneshot-?id=343023" title="Read Online Alice (KOMURA Ayumi) Ch.000: [Oneshot]">Ch.000: [Oneshot]</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/4.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Unity-of-Heaven"><img width="80px" height="100px" src="./kissmanga_files/878155212b5be994.jpg"></a><a href="http://kissmanga.com/Manga/Unity-of-Heaven"><span class="title">Unity of Heaven</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manhua" class="dotUnder" title="Manhua are Chinese comics originally produced in China.">Manhua</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Unity-of-Heaven/Ch-001--Round-001?id=343022" title="Read Online Unity of Heaven Ch.001: Round 001">Ch.001: Round 001</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/5.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Seigai-no-Majo"><img width="80px" height="100px" src="./kissmanga_files/1595812489fe3.jpg"></a><a href="http://kissmanga.com/Manga/Seigai-no-Majo"><span class="title">Seigai no Majo</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Harem" class="dotUnder" title="A series involving one male character and many female characters  (usually attracted to the male character). A Reverse Harem is when the  genders are reversed.">Harem</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Mature" class="dotUnder" title="Contains subject matter which may be too extreme for people under the age of 17. Titles in this category may contain intense violence, blood and gore, sexual content and/or strong language.">Mature</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Seinen" class="dotUnder" title="Seinen means young Man. Manga and anime that specifically targets  young adult males around the ages of 18 to 25 are seinen titles.The  stories in seinen works appeal to university students and those in the  working world. Typically the story lines deal with the issues of  adulthood.">Seinen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Seigai-no-Majo/Vol-001-Ch-001--You-should-not-wake-a-witch-up-?id=343020" title="Read Online Seigai no Majo Vol.001 Ch.001: You should not wake a witch up!">Vol.001 Ch.001: You should not wake a witch up!</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/6.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Shiki-YOKOYAMA-Mitsuteru"><img width="80px" height="100px" src="./kissmanga_files/1619792fe53a.jpg"></a><a href="http://kissmanga.com/Manga/Shiki-YOKOYAMA-Mitsuteru"><span class="title">Shiki (YOKOYAMA Mitsuteru)</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Historical" class="dotUnder" title="Having to do with old or ancient times.">Historical</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Seinen" class="dotUnder" title="Seinen means young Man. Manga and anime that specifically targets  young adult males around the ages of 18 to 25 are seinen titles.The  stories in seinen works appeal to university students and those in the  working world. Typically the story lines deal with the issues of  adulthood.">Seinen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Shiki-YOKOYAMA-Mitsuteru/Vol-001-Ch-002--Chancellor-Guan-Zhong?id=343019" title="Read Online Shiki (YOKOYAMA Mitsuteru) Vol.001 Ch.002: Chancellor Guan Zhong">Vol.001 Ch.002: Chancellor Guan Zhong</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/7.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/LiLy-EBISAWA-Mayo"><img width="80px" height="100px" src="./kissmanga_files/9263422i249183.jpg"></a><a href="http://kissmanga.com/Manga/LiLy-EBISAWA-Mayo"><span class="title">LiLy (EBISAWA Mayo)</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Gender-Bender" class="dotUnder" title="Girls dressing up as guys, guys dressing up as girls.. Guys turning into  girls, girls turning into guys.. I think you get the picture.">Gender Bender</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Ecchi" class="dotUnder" title="Possibly the line between hentai and non-hentai, ecchi usually refers to  fanservice put in to attract a certain group of fans.">Ecchi</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Slice-of-Life" class="dotUnder" title="
+As the name suggests, this genre represents day-to-day tribulations of one/many character(s). These challenges/events could technically happen in real life and are often -if not all the time- set in the present timeline in a world that mirrors our own.
+
+">Slice of Life</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/LiLy-EBISAWA-Mayo/Vol-001-Ch-002?id=343120" title="Read Online LiLy (EBISAWA Mayo) Vol.001 Ch.002">Vol.001 Ch.002</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/8.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Fei-Xi-Yan-Xue"><img width="80px" height="100px" src="./kissmanga_files/7586322i249141.jpg"></a><a href="http://kissmanga.com/Manga/Fei-Xi-Yan-Xue"><span class="title">Fei Xi Yan Xue</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Harem" class="dotUnder" title="A series involving one male character and many female characters  (usually attracted to the male character). A Reverse Harem is when the  genders are reversed.">Harem</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Historical" class="dotUnder" title="Having to do with old or ancient times.">Historical</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Romance" class="dotUnder" title="Any love related story.  We will define love as between man and woman in  this case. Other than that, it is up to your own imagination of what  love is.">Romance</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shoujo" class="dotUnder" title="A work intended and primarily written for females.  Usually involves a  lot of romance and strong character development.">Shoujo</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Fei-Xi-Yan-Xue/Ch-001?id=343006" title="Read Online Fei Xi Yan Xue Ch.001">Ch.001</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/9.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Trinity-Seven-7-nin-no-Masho-Tsukai-Comic-Anthology"><img width="80px" height="100px" src="./kissmanga_files/56722825d1b4f21a.jpg"></a><a href="http://kissmanga.com/Manga/Trinity-Seven-7-nin-no-Masho-Tsukai-Comic-Anthology"><span class="title">Trinity Seven - 7-nin no Masho Tsukai Comic Anthology</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Ecchi" class="dotUnder" title="Possibly the line between hentai and non-hentai, ecchi usually refers to  fanservice put in to attract a certain group of fans.">Ecchi</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Harem" class="dotUnder" title="A series involving one male character and many female characters  (usually attracted to the male character). A Reverse Harem is when the  genders are reversed.">Harem</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Romance" class="dotUnder" title="Any love related story.  We will define love as between man and woman in  this case. Other than that, it is up to your own imagination of what  love is.">Romance</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Trinity-Seven-7-nin-no-Masho-Tsukai-Comic-Anthology/Vol-001-Ch-010--Breakdown-Sugoroku?id=342873" title="Read Online Trinity Seven - 7-nin no Masho Tsukai Comic Anthology Vol.001 Ch.010: Breakdown Sugoroku">Vol.001 Ch.010: Breakdown Sugoroku</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/10.png"></div></div>
+<div style="text-align: right; font-size: 16px">
+<a href="http://kissmanga.com/MangaList/Newest">More...</a>
+</div>
+</div>
+<div id="tab-mostview" style="display: none;">
+<div style="position:relative"><a href="http://kissmanga.com/Manga/One-Piece"><img width="80px" height="100px" src="./kissmanga_files/5569412cover.jpg"></a><a href="http://kissmanga.com/Manga/One-Piece"><span class="title">One Piece</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Martial-Arts" class="dotUnder" title="As the name suggests, anything martial arts related. Any of several arts of combat or self-defense, such as aikido, karate, judo, or tae kwon do, kendo, fencing, and so on and so forth.">Martial Arts</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Mystery" class="dotUnder" title="Usually an unexplained event occurs, and the main protagonist attempts to find out what caused it.">Mystery</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/One-Piece/One-Piece---852?id=342890" title="Read Online One Piece One Piece - 852">One Piece - 852</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/1.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Naruto"><img width="80px" height="100px" src="./kissmanga_files/5189522cover.jpg"></a><a href="http://kissmanga.com/Manga/Naruto"><span class="title">Naruto</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Martial-Arts" class="dotUnder" title="As the name suggests, anything martial arts related. Any of several arts of combat or self-defense, such as aikido, karate, judo, or tae kwon do, kendo, fencing, and so on and so forth.">Martial Arts</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Naruto/Naruto-Side-Story-001?id=290947" title="Read Online Naruto Naruto Side Story 001">Naruto Side Story 001</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/2.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Bleach"><img width="80px" height="100px" src="./kissmanga_files/5080852717642bleach.jpg"></a><a href="http://kissmanga.com/Manga/Bleach"><span class="title">Bleach</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Bleach/686--End----Death---Strawberry?id=309727" title="Read Online Bleach 686 (End) - Death &amp; Strawberry">686 (End) - Death &amp; Strawberry</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/3.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Fairy-Tail"><img width="80px" height="100px" src="./kissmanga_files/6118362images.jpg"></a><a href="http://kissmanga.com/Manga/Fairy-Tail"><span class="title">Fairy Tail</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Fairy-Tail/Chapter-517?id=343059" title="Read Online Fairy Tail Chapter 517">Chapter 517</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/4.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Shingeki-no-Kyojin"><img width="80px" height="100px" src="./kissmanga_files/7115452i111256.jpg"></a><a href="http://kissmanga.com/Manga/Shingeki-no-Kyojin"><span class="title">Shingeki no Kyojin</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Horror" class="dotUnder" title="A painful emotion of fear, dread, and abhorrence; a shuddering with terror and detestation; the feeling inspired by something frightful and shocking.">Horror</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Mature" class="dotUnder" title="Contains subject matter which may be too extreme for people under the age of 17. Titles in this category may contain intense violence, blood and gore, sexual content and/or strong language.">Mature</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Mystery" class="dotUnder" title="Usually an unexplained event occurs, and the main protagonist attempts to find out what caused it.">Mystery</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Tragedy" class="dotUnder" title="
+Contains events resulting in great loss and misfortune.
+">Tragedy</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Shingeki-no-Kyojin/Chapter-089?id=341046" title="Read Online Shingeki no Kyojin Chapter 089">Chapter 089</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/5.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Onepunch-Man"><img width="80px" height="100px" src="./kissmanga_files/7167242i137358.jpg"></a><a href="http://kissmanga.com/Manga/Onepunch-Man"><span class="title">Onepunch-Man</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Seinen" class="dotUnder" title="Seinen means young Man. Manga and anime that specifically targets  young adult males around the ages of 18 to 25 are seinen titles.The  stories in seinen works appeal to university students and those in the  working world. Typically the story lines deal with the issues of  adulthood.">Seinen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Onepunch-Man/Punch-070-002?id=343033" title="Read Online Onepunch-Man Punch 070.002">Punch 070.002</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/6.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Berserk"><img width="80px" height="100px" src="./kissmanga_files/1480682Berserk-Cover.jpg"></a><a href="http://kissmanga.com/Manga/Berserk"><span class="title">Berserk</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Horror" class="dotUnder" title="A painful emotion of fear, dread, and abhorrence; a shuddering with terror and detestation; the feeling inspired by something frightful and shocking.">Horror</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Berserk/Chapter-347?id=322171" title="Read Online Berserk Chapter 347">Chapter 347</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/7.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Shokugeki-no-Soma"><img width="80px" height="100px" src="./kissmanga_files/3364272i144768.jpg"></a><a href="http://kissmanga.com/Manga/Shokugeki-no-Soma"><span class="title">Shokugeki no Soma</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Drama" class="dotUnder" title="A work meant to bring on an emotional response, such as instilling  sadness or tension.">Drama</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Ecchi" class="dotUnder" title="Possibly the line between hentai and non-hentai, ecchi usually refers to  fanservice put in to attract a certain group of fans.">Ecchi</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Romance" class="dotUnder" title="Any love related story.  We will define love as between man and woman in  this case. Other than that, it is up to your own imagination of what  love is.">Romance</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/School-Life" class="dotUnder" title="Having a major setting of the story deal with some type of school.">School Life</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Shokugeki-no-Soma/Chapter-198?id=342910" title="Read Online Shokugeki no Soma Chapter 198">Chapter 198</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/8.png"></div></div><div style="position:relative"><a href="http://kissmanga.com/Manga/Dragon-Ball"><img width="80px" height="100px" src="./kissmanga_files/7075082gonballz14.jpg"></a><a href="http://kissmanga.com/Manga/Dragon-Ball"><span class="title">Dragon Ball</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Action" class="dotUnder" title="A work typically depicting fighting, violence, chaos, and fast paced  motion.">Action</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Adventure" class="dotUnder" title="If a character in the story goes on a trip or along that line, your best  bet is that it is an adventure manga.  Otherwise, it&#39;s up to your  personal prejudice on this case.">Adventure</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Comedy" class="dotUnder" title="A dramatic work that is light and often humorous or satirical in tone  and that usually contains a happy resolution of the thematic conflict.">Comedy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Fantasy" class="dotUnder" title="Anything that involves, but not limited to, magic, dream world, and  fairy tales.">Fantasy</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Manga" class="dotUnder" title="Manga is the Japanese word for comics and consists of comicsand print cartoons">Manga</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Martial-Arts" class="dotUnder" title="As the name suggests, anything martial arts related. Any of several arts of combat or self-defense, such as aikido, karate, judo, or tae kwon do, kendo, fencing, and so on and so forth.">Martial Arts</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Sci-fi" class="dotUnder" title="Short for science fiction, these works involve twists on technology and  other science related phenomena which are contrary or stretches of the  modern day scientific world.">Sci-fi</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Dragon-Ball/Dragon-Ball-520-?id=249750" title="Read Online Dragon Ball Chapter 520:">Chapter 520:</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px"><img src="./kissmanga_files/9.png"></div></div><div style="position:relative" class="blue"><a href="http://kissmanga.com/Manga/Boku-no-Hero-Academia"><img width="80px" height="100px" src="./kissmanga_files/6386262f952fa7e0ad475017f3090d26228776b.jpg"></a><a href="http://kissmanga.com/Manga/Boku-no-Hero-Academia"><span class="title">Boku no Hero Academia</span></a><p><span class="info">Genres:</span>&nbsp;<a href="http://kissmanga.com/Genre/Shounen" class="dotUnder" title="A work intended and primarily written for males.  These  works usually  involve fighting and/or violence.">Shounen</a><span class="info">,</span> <a href="http://kissmanga.com/Genre/Supernatural" class="dotUnder" title="Usually   entails amazing and unexplained powers or events which defy the laws of   physics.">Supernatural</a></p><p><span class="info">Latest:</span>&nbsp;<a href="http://kissmanga.com/Manga/Boku-no-Hero-Academia/122---The-Season-of-Encounters?id=342897" title="Read Online Boku no Hero Academia 122 - The Season of Encounters">122 - The Season of Encounters</a></p><div style="position:absolute;top:0px; left:680px; width:28px; height:28px; background-color:#161616"><img src="./kissmanga_files/10.png"></div></div>
+<div style="text-align: right; font-size: 16px">
+<a href="http://kissmanga.com/MangaList/MostPopular">More...</a>
+</div>
+</div>
+<div class="clear">
+</div>
+</div>
+ 
+</div>
+ 
+<div class="clear2">
+</div>
+<div style="text-align: center; padding: 10px 0px 10px 0px;">
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="adsIfrme1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="./kissmanga_files/adprotect300.html" width="300px" height="250px">
+</iframe><div class="divCloseBut" style="position:absolute; left:649px; top: 2407px"><a href="http://kissmanga.com/#" onclick="$(&#39;#adsIfrme1&#39;).remove();$(this).remove(); InitCloseButton(); return false;">Hide</a></div>
+</div>
+<script type="text/javascript">
+
+    function AddCloseButton(id) {
+        var elem = $('#' + id);
+        if (elem.position() != null) {
+            var top = elem.position().top + elem.height();
+            var left = elem.position().left + elem.width() - 24;
+            elem.after('<div class="divCloseBut" style="position:absolute; left:' + left + 'px; top: ' + top + 'px"><a href="#" onclick="$(\'#' + id + '\').remove();$(this).remove(); InitCloseButton(); return false;">Hide</a></div>');
+        }
+    }
+
+    function InitCloseButton() {
+        $('.divCloseBut').remove();
+        AddCloseButton('adsIfrme1');
+    }
+    InitCloseButton();
+
+</script>
+</div>
+ 
+<div id="rightside">
+<div class="rightBox">
+<div class="barTitle">
+Latest update</div>
+<div class="barContent">
+<div class="arrow-general">
+&nbsp;</div>
+<div>
+<img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Fate/Extra - Mikon! Kyasuko-chan!?" href="http://kissmanga.com/Manga/Fate-Extra-Mikon-Kyasuko-chan">Fate/Extra - Mikon! Kyasuko-chan!?</a> <a class="textDark" title="Read online Fate/Extra - Mikon! Kyasuko-chan!? Vol.005 Ch.030: Gawain VS Karna 001" href="http://kissmanga.com/Manga/Fate-Extra-Mikon-Kyasuko-chan/Vol-005-Ch-030--Gawain-VS-Karna-001?id=343283">Vol.005 Ch.030: Gawain VS Karna 001</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Star Martial God Technique" href="http://kissmanga.com/Manga/Star-Martial-God-Technique">Star Martial God Technique</a> <a class="textDark" title="Read online Star Martial God Technique Ch.031: Star Flame Blade" href="http://kissmanga.com/Manga/Star-Martial-God-Technique/Ch-031--Star-Flame-Blade?id=343282">Ch.031: Star Flame Blade</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Ayakashi Utahime Karuta" href="http://kissmanga.com/Manga/Ayakashi-Utahime-Karuta">Ayakashi Utahime Karuta</a> <a class="textDark" title="Read online Ayakashi Utahime Karuta Vol.001 Ch.005: Song Of Demon Slaying (Part 001)" href="http://kissmanga.com/Manga/Ayakashi-Utahime-Karuta/Vol-001-Ch-005--Song-Of-Demon-Slaying--Part-001-?id=343281">Vol.001 Ch.005: Song Of Demon Slaying (Part 001)</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Kimi wa, Ore ga Suki Datte Ittara Donna Kao Suru Darou." href="http://kissmanga.com/Manga/Kimi-wa-Ore-ga-Suki-Datte-Ittara-Donna-Kao-Suru-Darou">Kimi wa, Ore ga Suki Datte Ittara Donna Kao Suru Darou.</a> <a class="textDark" title="Read online Kimi wa, Ore ga Suki Datte Ittara Donna Kao Suru Darou. Ch.002" href="http://kissmanga.com/Manga/Kimi-wa-Ore-ga-Suki-Datte-Ittara-Donna-Kao-Suru-Darou/Ch-002?id=343280">Ch.002</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Yaoguai Mingdan" href="http://kissmanga.com/Manga/Yaoguai-Mingdan">Yaoguai Mingdan</a> <a class="textDark" title="Read online Yaoguai Mingdan Ch.243: Random Door" href="http://kissmanga.com/Manga/Yaoguai-Mingdan/Ch-243--Random-Door?id=343279">Ch.243: Random Door</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Yakushoku Distpiari - Gesellshaft Blue" href="http://kissmanga.com/Manga/Yakushoku-Distpiari-Gesellshaft-Blue">Yakushoku Distpiari - Gesellshaft Blue</a> <a class="textDark" title="Read online Yakushoku Distpiari - Gesellshaft Blue Vol.004 Ch.024: Information, Steel Frames, Fastidiousness, and Decoration" href="http://kissmanga.com/Manga/Yakushoku-Distpiari-Gesellshaft-Blue/Vol-004-Ch-024--Information--Steel-Frames--Fastidiousness--and-Decoration?id=343278">Vol.004 Ch.024: Information, Steel Frames, Fastidiousness, and Decoration</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Fire Punch" href="http://kissmanga.com/Manga/Fire-Punch">Fire Punch</a> <a class="textDark" title="Read online Fire Punch Ch.035" href="http://kissmanga.com/Manga/Fire-Punch/Ch-035?id=343277">Ch.035</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Touken Ranbu Anthology ~ SQEX Formation ~" href="http://kissmanga.com/Manga/Touken-Ranbu-Anthology-SQEX-Formation">Touken Ranbu Anthology ~ SQEX Formation ~</a> <a class="textDark" title="Read online Touken Ranbu Anthology ~ SQEX Formation ~ Vol.001 Ch.004: First Time at Horsekeeping / Irohe" href="http://kissmanga.com/Manga/Touken-Ranbu-Anthology-SQEX-Formation/Vol-001-Ch-004--First-Time-at-Horsekeeping---Irohe?id=343276">Vol.001 Ch.004: First Time at Horsekeeping / Irohe</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online The Legendary Moonlight Sculptor" href="http://kissmanga.com/Manga/Dalbic-Jogaksa">The Legendary Moonlight Sculptor</a> <a class="textDark" title="Read online The Legendary Moonlight Sculptor Chapter 081" href="http://kissmanga.com/Manga/Dalbic-Jogaksa/Chapter-081?id=343275">Chapter 081</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Kimetsu no Yaiba" href="http://kissmanga.com/Manga/Kimetsu-no-Yaiba">Kimetsu no Yaiba</a> <a class="textDark" title="Read online Kimetsu no Yaiba Ch.045: Joint Trial of the Demon Hunter Pillars" href="http://kissmanga.com/Manga/Kimetsu-no-Yaiba/Ch-045--Joint-Trial-of-the-Demon-Hunter-Pillars?id=343274">Ch.045: Joint Trial of the Demon Hunter Pillars</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Mousou Telepathy" href="http://kissmanga.com/Manga/Mousou-Telepathy">Mousou Telepathy</a> <a class="textDark" title="Read online Mousou Telepathy Ch.104: Digging a Deeper Grave" href="http://kissmanga.com/Manga/Mousou-Telepathy/Ch-104--Digging-a-Deeper-Grave?id=343271">Ch.104: Digging a Deeper Grave</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online unTOUCHable" href="http://kissmanga.com/Manga/unTOUCHable">unTOUCHable</a> <a class="textDark" title="Read online unTOUCHable Chapter 129" href="http://kissmanga.com/Manga/unTOUCHable/Chapter-129?id=343264">Chapter 129</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Tenkuu Shinpan" href="http://kissmanga.com/Manga/Tenkuu-Shinpan">Tenkuu Shinpan</a> <a class="textDark" title="Read online Tenkuu Shinpan Episode 153" href="http://kissmanga.com/Manga/Tenkuu-Shinpan/Episode-153?id=343263">Episode 153</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Aisopos" href="http://kissmanga.com/Manga/Aisopos">Aisopos</a> <a class="textDark" title="Read online Aisopos Chapter 121" href="http://kissmanga.com/Manga/Aisopos/Chapter-121?id=343261">Chapter 121</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Oh! Lord Jesus" href="http://kissmanga.com/Manga/Oh-Lord-Jesus">Oh! Lord Jesus</a> <a class="textDark" title="Read online Oh! Lord Jesus Chapter 016" href="http://kissmanga.com/Manga/Oh-Lord-Jesus/Chapter-016?id=343260">Chapter 016</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Yami no Kodou" href="http://kissmanga.com/Manga/Yami-no-Kodou">Yami no Kodou</a> <a class="textDark" title="Read online Yami no Kodou Vol.025 Ch.100" href="http://kissmanga.com/Manga/Yami-no-Kodou/Vol-025-Ch-100?id=343257">Vol.025 Ch.100</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Amalgam of Distortion" href="http://kissmanga.com/Manga/Amalgam-of-Distortion">Amalgam of Distortion</a> <a class="textDark" title="Read online Amalgam of Distortion Vol.003 Ch.011: Chapter 011" href="http://kissmanga.com/Manga/Amalgam-of-Distortion/Vol-003-Ch-011--Chapter-011?id=343256">Vol.003 Ch.011: Chapter 011</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Yuragi-sou no Yuuna-san" href="http://kissmanga.com/Manga/Yuragi-sou-no-Yuuna-san">Yuragi-sou no Yuuna-san</a> <a class="textDark" title="Read online Yuragi-sou no Yuuna-san Ch.046: Yuna-san and the New Morning" href="http://kissmanga.com/Manga/Yuragi-sou-no-Yuuna-san/Ch-046--Yuna-san-and-the-New-Morning?id=343254">Ch.046: Yuna-san and the New Morning</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Minato Machi Neko Machi" href="http://kissmanga.com/Manga/Minato-Machi-Neko-Machi">Minato Machi Neko Machi</a> <a class="textDark" title="Read online Minato Machi Neko Machi Vol.001 Ch.004: Ms. Kano&#39;s Sleeping Lover" href="http://kissmanga.com/Manga/Minato-Machi-Neko-Machi/Vol-001-Ch-004--Ms--Kano-s-Sleeping-Lover?id=343253">Vol.001 Ch.004: Ms. Kano's Sleeping Lover</a><div class="clear" style="height:5px"></div><img src="./kissmanga_files/bullet.png">&nbsp;<a title="Read online Takeda Shingen (YOKOYAMA Mitsuteru)" href="http://kissmanga.com/Manga/Takeda-Shingen-YOKOYAMA-Mitsuteru">Takeda Shingen (YOKOYAMA Mitsuteru)</a> <a class="textDark" title="Read online Takeda Shingen (YOKOYAMA Mitsuteru) Vol.007 Ch.054" href="http://kissmanga.com/Manga/Takeda-Shingen-YOKOYAMA-Mitsuteru/Vol-007-Ch-054?id=343252">Vol.007 Ch.054</a><div class="clear" style="height:5px"></div>
+<div style="text-align: right; font-size: 14px; padding-top: 5px">
+<a href="http://kissmanga.com/MangaList/LatestUpdate">More...</a>
+</div>
+</div>
+</div>
+</div>
+<div class="clear2">
+</div>
+<div>
+<div style="text-align: center">
+<iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" id="adsIfrme2" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="./kissmanga_files/adprotect160-3.html" width="160px" height="600px">
+</iframe>
+</div>
+</div>
+<div class="clear2">
+</div>
+<div class="rightBox">
+<div class="barTitle">
+Like me, please ^^</div>
+<div class="barContent">
+<div class="arrow-general">
+&nbsp;</div>
+<div>
+<div class="clear2">
+</div>
+ 
+<script type="text/javascript" src="./kissmanga_files/plusone.js" gapi_processed="true"></script>
+ 
+<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 106px; height: 24px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I1_1484596703234" name="I1_1484596703234" src="./kissmanga_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div>
+<div class="clear2">
+</div>
+<div class="clear2">
+</div>
+<iframe src="./kissmanga_files/likebox.html" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 195px;
+                            height: 197px;" allowtransparency="true"></iframe>
+</div>
+</div>
+</div>
+<div class="clear2">
+</div>
+<script type="text/javascript">
+                $('#aCommentHide').click(function () {
+                    $('#divCommentHide').show();
+                    $(this).hide();
+                });
+            </script>
+</div>
+<div class="clear">
+</div>
+</div>
+ 
+<div class="clear">
+&nbsp;</div>
+<div class="clear">
+&nbsp;</div>
+<div class="clear">
+&nbsp;</div>
+<div style="z-index: 0; position: absolute; top: 220px; left: 0px; width: 100%; height: 600px;
+    overflow: hidden; visibility: hidden">
+<div id="divFloatLeft" style="position: absolute; visibility: visible; left: -32px;">
+<iframe frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="./kissmanga_files/adprotect160.html" width="160px" height="600px"></iframe>
+</div>
+<div id="divFloatRight" style="position: absolute; visibility: visible; right: -32px;">
+<iframe frameborder="0" marginwidth="0" marginheight="0" scrolling="no" src="./kissmanga_files/adprotect160-2.html" width="160px" height="600px" data-integralas-id-c187a658-788d-fca3-7496-17b19476fe9f=""></iframe>
+</div>
+</div>
+<script type="text/javascript">
+    function DoAdsPosition() {
+        var browserWidth = $(window).width();
+        var webWidth = 1000;
+        var bannerWidth = 160;
+        var blankWidth = (browserWidth - webWidth) / 2;
+        var margin = 15;
+
+        $('#divFloatLeft').css('left', browserWidth - webWidth - blankWidth - bannerWidth - margin);
+        $('#divFloatLeft').show();
+
+        $('#divFloatRight').css('right', browserWidth - webWidth - blankWidth - bannerWidth - margin);
+        $('#divFloatRight').show();
+    }
+
+    DoAdsPosition();
+    $(window).resize(function () {
+        DoAdsPosition();
+    });
+</script>
+</div><iframe name="oauth2relay228828302" id="oauth2relay228828302" src="./kissmanga_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe>
+<div id="footer" style="top: 20px;">
+<div id="footcontainer" style="position: relative">
+<p>
+<a href="http://kissmanga.com/">KissManga.com</a>. Copyrights and trademarks for the manga, and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law.
+<a href="http://kissmanga.com/Message/PrivacyPolicy">Privacy Policy</a>&nbsp;|&nbsp;<a href="http://kisscartoon.se/">Watch cartoons online</a>
+&nbsp;&nbsp;</p>
+<div style="position: absolute; left: 200px; top: 20px">
+</div>
+</div>
+</div>
+<script type="text/javascript">
+        $('#footer').css('top', $(document).height() - $('#containerRoot').height());
+    </script>
+
+
+</body></html>

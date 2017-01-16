@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.view.activity.HomeActivity;
 import com.thaontm.mangayomu.view.activity.MangaDetailActivity;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("manga", (MangaOverview)txtName.getTag());
+                    bundle.putParcelable("manga", (MangaOverview) txtName.getTag());
                     Intent intent = new Intent(context, MangaDetailActivity.class);
                     intent.putExtras(bundle);
                     context.startActivity(intent);
@@ -65,14 +64,14 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
     @Override
     public void onBindViewHolder(MangaOverviewHolder holder, int position) {
         MangaOverview mangaOverview = mangaOverviewList.get(position);
+        int imageID = context.getResources().getIdentifier(mangaOverview.getPreviewImageUrl(), "drawable", context.getPackageName());
         Picasso.with(context)
-                .load(mangaOverview.getPreviewImageUrl())
+                .load(imageID == 0 ? R.drawable.a4498572_enm_dq_eor_v01_c01_cover : imageID)
                 .into(holder.imageManga);
         holder.txtName.setText(mangaOverview.getName());
         holder.txtGenres.setText(mangaOverview.getGenresAsString());
         holder.txtName.setTag(mangaOverview);
     }
-
 
     @Override
     public int getItemCount() {
