@@ -3,31 +3,24 @@ package com.thaontm.mangayomu.view.activity;
 import android.app.SearchManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.view.adapter.MangaOverviewAdapter;
 import com.thaontm.mangayomu.view.adapter.ViewPagerAdapter;
-import com.thaontm.mangayomu.view.fragment.AFagment;
+import com.thaontm.mangayomu.view.fragment.ListMangaFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Data;
 
 public class HomeActivity extends AppCompatActivity {
     private List<MangaOverview> mangaOverviewList = new ArrayList<>();
@@ -49,9 +42,9 @@ public class HomeActivity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new AFagment());
-        fragments.add(new AFagment());
-        fragments.add(new AFagment());
+        fragments.add(new ListMangaFragment());
+        fragments.add(new ListMangaFragment());
+        fragments.add(new ListMangaFragment());
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);

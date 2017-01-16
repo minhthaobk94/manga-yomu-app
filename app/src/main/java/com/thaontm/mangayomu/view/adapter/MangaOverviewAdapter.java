@@ -2,6 +2,7 @@ package com.thaontm.mangayomu.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,10 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("manga", (MangaOverview)txtName.getTag());
                     Intent intent = new Intent(context, MangaDetailActivity.class);
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
             });
@@ -66,6 +70,7 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
                 .into(holder.imageManga);
         holder.txtName.setText(mangaOverview.getName());
         holder.txtGenres.setText(mangaOverview.getGenres());
+        holder.txtName.setTag(mangaOverview);
     }
 
 
