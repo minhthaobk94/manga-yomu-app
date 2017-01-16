@@ -6,11 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thaontm.mangayomu.R;
-import com.thaontm.mangayomu.model.bean.MangaDetail;
+import com.thaontm.mangayomu.model.bean.MangaOverview;
+
+import org.jsoup.helper.StringUtil;
 
 /**
  * Created by thao on 1/13/2017.
@@ -18,26 +19,26 @@ import com.thaontm.mangayomu.model.bean.MangaDetail;
  */
 
 public class MangaDetailFragment extends Fragment {
-    MangaDetail mangaDetail = new MangaDetail();
+    MangaOverview mangaDetail;
+    private TextView mTvTitle;
     private TextView mTvGenres;
-    private TextView mTvState;
-    private TextView mTvDescription;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mangaDetail = getArguments().getParcelable("Manga");
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_manga_info, null, false);
-        mangaDetail.setMDescription("Description here");
-        mangaDetail.setMGenres("Genres: ...");
-        mangaDetail.setMState("Status here");
 
-        mTvDescription = (TextView) view.findViewById(R.id.tvDescription);
+        mTvTitle = (TextView) view.findViewById(R.id.tvTitle);
         mTvGenres = (TextView) view.findViewById(R.id.tvGenres);
-        mTvState = (TextView) view.findViewById(R.id.tvState);
 
-        mTvDescription.setText(mangaDetail.getMDescription());
-        mTvGenres.setText(mangaDetail.getMGenres());
-        mTvState.setText(mangaDetail.getMState());
+        mTvTitle.setText(mangaDetail.getName());
+        mTvGenres.setText(StringUtil.join(mangaDetail.getGenres(), "\n"));
         return view;
     }
 }

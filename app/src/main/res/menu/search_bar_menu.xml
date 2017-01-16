@@ -6,9 +6,4 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"
         android:title="@string/search_bar"  />
-    <item
-        android:id="@+id/login"
-        android:title="@string/login"
-        android:icon="@mipmap/ic_account_48px"
-        app:showAsAction="always" />
 </menu>
