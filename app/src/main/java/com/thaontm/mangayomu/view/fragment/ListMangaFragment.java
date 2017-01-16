@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.model.dao.SqlLiteDbHelper;
+import com.thaontm.mangayomu.model.engine.MangaOverviewService;
 import com.thaontm.mangayomu.view.adapter.MangaOverviewAdapter;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class ListMangaFragment extends Fragment {
     private MangaOverviewAdapter mangaOverviewAdapter;
     private SqlLiteDbHelper mSqlLiteDbHelper;
     private List<MangaOverview> mMangas;
+
+    private static final String MANGA_RESOUCE_URL = "http://kissmanga.com/";
 
     @Nullable
     @Override
@@ -53,8 +56,9 @@ public class ListMangaFragment extends Fragment {
     }
 
     public void initData(){
-        mSqlLiteDbHelper = new SqlLiteDbHelper(getActivity());
-        mSqlLiteDbHelper.openDataBase();
-        mMangas = mSqlLiteDbHelper.GetMangas();
+        // mSqlLiteDbHelper = new SqlLiteDbHelper(getActivity());
+        // mSqlLiteDbHelper.openDataBase();
+        MangaOverviewService service = new MangaOverviewService();
+        mMangas = service.fetchMangaOverviews(MANGA_RESOUCE_URL);
     }
 }

@@ -69,7 +69,7 @@ public class MangaOverviewAdapter extends RecyclerView.Adapter<MangaOverviewAdap
                 .load(mangaOverview.getPreviewImageUrl())
                 .into(holder.imageManga);
         holder.txtName.setText(mangaOverview.getName());
-        holder.txtGenres.setText(mangaOverview.getGenres());
+        holder.txtGenres.setText(mangaOverview.getGenresAsString());
         holder.txtName.setTag(mangaOverview);
     }
 

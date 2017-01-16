@@ -48,7 +48,7 @@ public class SqlLiteDbHelper extends SQLiteOpenHelper {
             mangaOverview.setName(cursor.getString(1));
             mangaOverview.setMDescription(cursor.getString(2));
             mangaOverview.setMState(cursor.getString(4));
-            mangaOverview.setGenres(cursor.getString(5));
+            //mangaOverview.setGenres(cursor.getString(5));
             mangaOverview.setPreviewImageUrl("http://ibdp.huluim.com/video/12816667?size=320x180");
             mMangas.add(mangaOverview);
             cursor.moveToNext();
