@@ -41,7 +41,7 @@
                         android:background="@color/divider"
                         android:padding="@dimen/activity_horizontal_margin"
                         android:text="Item title"
-                        android:textColor="#fff"
+                        android:textColor="#770e0e0e"
                         android:textSize="@dimen/text_size_primary"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -51,7 +51,7 @@
                 android:id="@+id/item_genres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
+                android:background="#3effffff"
                 android:ellipsize="none"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="Item description"
