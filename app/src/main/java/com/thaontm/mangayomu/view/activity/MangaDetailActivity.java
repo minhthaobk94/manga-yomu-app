@@ -56,7 +56,7 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manga_detail_material_design);
+        setContentView(R.layout.activity_manga_detail);
         ButterKnife.bind(this);
         mangaDetail = (MangaDetail) getIntent().getSerializableExtra(MANGA_DETAIL);
         mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);

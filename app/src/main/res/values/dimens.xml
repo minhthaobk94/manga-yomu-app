@@ -17,6 +17,9 @@
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="margin_short">8dp</dimen>
     <dimen name="margin_extra_short">4dp</dimen>
+    <dimen name="padding_standard">16dp</dimen>
+    <dimen name="padding_short">8dp</dimen>
+    <dimen name="padding_extra_short">4dp</dimen>
 
     <dimen name="toolbar_elevation">4dp</dimen>
 
@@ -35,7 +38,7 @@
     <dimen name="sliding_overlay_blur_size">4dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="card_margin">5dp</dimen>
-    <dimen name="card_mangaoverview_radius">0dp</dimen>
+    <dimen name="card_mangaoverview_radius">3dp</dimen>
     <dimen name="mangaoverview_cover_height">160dp</dimen>
     <dimen name="mangaoverview_title_padding">10dp</dimen>
     <dimen name="mangaoverview_title">15dp</dimen>
@@ -44,4 +47,9 @@
     <dimen name="ic_mangaoverview_overflow_margin_top">10dp</dimen>
     <dimen name="manga_title">24dp</dimen>
     <dimen name="detail_manga_height">250dp</dimen>
+
+    <dimen name="primary_text_size">16sp</dimen>
+    <dimen name="medium_text_size">20sp</dimen>
+    <dimen name="viewpager_height">512dp</dimen>
+    <dimen name="card_mangaoverview_elevation">3dp</dimen>
 </resources>
