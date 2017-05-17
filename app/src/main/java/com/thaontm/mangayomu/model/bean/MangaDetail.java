@@ -1,5 +1,7 @@
 package com.thaontm.mangayomu.model.bean;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -8,8 +10,11 @@ import lombok.Data;
  */
 
 @Data
-public class MangaDetail {
-    private String mDescription;
-    private String mGenres;
-    private String mState;
+public class MangaDetail extends MangaInfo implements Serializable{
+    private String title;
+    private String imageUrl;
+    private String status;
+    private String genres;
+    private String author;
+    private String description;
 }

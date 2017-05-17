@@ -1,5 +1,6 @@
 package com.thaontm.mangayomu.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -7,53 +8,90 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
-import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.view.adapter.MangaDetailViewPagerAdapter;
+import com.thaontm.mangayomu.model.bean.ChapterImage;
+import com.thaontm.mangayomu.model.bean.MangaChapter;
+import com.thaontm.mangayomu.model.bean.MangaDetail;
+import com.thaontm.mangayomu.model.provider.Callback;
+import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 import com.thaontm.mangayomu.view.fragment.MangaDetailFragment;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thao on 1/13/2017.
  * Copyright thao 2017.
  */
 
-public class MangaDetailActivity extends AppCompatActivity {
-    private TabLayout mTabLayoutDetail;
-    private MangaDetailViewPagerAdapter mDetailViewPagerAdapter;
-    private ViewPager mViewPager;
-    private ImageView imgView;
-    private MangaOverview mangaOverview;
+public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener{
+
+    static final String MANGA_DETAIL = "manga_detail";
+    static final String CHAPTER = "manga_chapter";
+    @BindView(R.id.manga_image) ImageView mMangaImage;
+    @BindView(R.id.detail_tabs) TabLayout mDetailTabs;
+    @BindView(R.id.view_pager) ViewPager mViewPager;
+    @BindView(R.id.manga_title) TextView mTitle;
+    private MangaDetailFragment mangaDetailFragment;
+    private MangaChapterFragment mangaChapterFragment;
+    private MangaDetail mangaDetail;
+    private MangaChapter mangaChapter;
+    private KakalotMangaProvider kakalotMangaProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manga_detail);
+        ButterKnife.bind(this);
+        mangaDetail = (MangaDetail) getIntent().getSerializableExtra(MANGA_DETAIL);
+        mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
+        Picasso.with(this).load(mangaDetail.getImageUrl()).fit().into(mMangaImage);
+        mTitle = (TextView) findViewById(R.id.manga_title);
+        mangaChapterFragment = new MangaChapterFragment();
 
-        Bundle bundle = getIntent().getExtras();
-        mangaOverview = bundle.getParcelable("manga");
+        kakalotMangaProvider = new KakalotMangaProvider();
+        kakalotMangaProvider.getMangaChapters(mangaDetail.getBaseUrl(), new Callback<List<MangaChapter>>() {
+            @Override
+            public void onSuccess(final List<MangaChapter> result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mangaChapterFragment.setMangaChapters(result);
+                    }
+                });
+            }
 
-        imgView = (ImageView) findViewById(R.id.image_manga_detail);
-        int imageID = getResources().getIdentifier(mangaOverview.getPreviewImageUrl(), "drawable", MangaDetailActivity.this.getPackageName());
-        imgView.setImageResource(imageID);
+            @Override
+            public void onError(Throwable what) {
 
-        mTabLayoutDetail = (TabLayout) findViewById(R.id.detail_tabs);
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new MangaDetailFragment());
-        fragments.add(new MangaDetailFragment());
+            }
+        });
 
-        for (Fragment f : fragments) {
-            Bundle b = new Bundle();
-            b.putParcelable("Manga", mangaOverview);
-            f.setArguments(b);
-        }
+        mangaDetailFragment = MangaDetailFragment.newInstance(mangaDetail);
 
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mDetailViewPagerAdapter = new MangaDetailViewPagerAdapter(getSupportFragmentManager(), fragments);
-        mViewPager.setAdapter(mDetailViewPagerAdapter);
-        mTabLayoutDetail.setupWithViewPager(mViewPager);
+        setupViewPager(mViewPager);
+        mDetailTabs.setupWithViewPager(mViewPager);
+
+    }
+
+    private void setupViewPager(ViewPager mViewPager) {
+        HomeActivity.ViewPagerAdapter adapter = new HomeActivity.ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(mangaDetailFragment, "INFO");
+        adapter.addFragment(mangaChapterFragment, "CHAPTER");
+        mViewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onListFragmentInteraction(MangaChapter item) {
+        Intent intent = new Intent(MangaDetailActivity.this, ReadMangaActivity.class);
+        intent.putExtra(MangaDetailActivity.CHAPTER, item);
+        startActivity(intent);
     }
 }

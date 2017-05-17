@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.thaontm.mangayomu.view.activity.ReadMangaActivity">
 
-    <!--<ViewFlipper-->
-        <!--android:id="@+id/viewFlipperPage"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <ImageView
-            android:id="@+id/imange_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    <!--</ViewFlipper>-->
+    <ImageView
+        android:id="@+id/image_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_bar"/>
 
-</LinearLayout>
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/primary_dark"
+        app:bb_activeTabColor="@color/accent_light"
+        app:bb_behavior="iconsOnly"
+        app:bb_inActiveTabColor="@color/accent_light"
+        app:bb_showShadow="false"
+        app:bb_tabXmlResource="@xml/bottom_tabs" />
+
+</RelativeLayout>
