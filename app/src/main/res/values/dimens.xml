@@ -42,4 +42,6 @@
     <dimen name="ic_mangaoverview_overflow_width">20dp</dimen>
     <dimen name="ic_mangaoverview_overflow_height">30dp</dimen>
     <dimen name="ic_mangaoverview_overflow_margin_top">10dp</dimen>
+    <dimen name="manga_title">24dp</dimen>
+    <dimen name="detail_manga_height">250dp</dimen>
 </resources>
