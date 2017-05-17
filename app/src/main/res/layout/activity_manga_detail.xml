@@ -27,23 +27,22 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/manga_image"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/flexible_space_image_height"
-                    android:scaleType="matrix"/>
+                    android:scaleType="matrix" />
 
                 <TextView
                     android:id="@+id/manga_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_primary"
                     android:layout_alignBottom="@+id/manga_image"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:textSize="@dimen/text_size_primary" />
             </RelativeLayout>
 
 
