@@ -14,11 +14,11 @@
         android:id="@+id/btnCloseDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primary_light"
-        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewDictDialog"
         android:gravity="right"
         android:text="CLOSE"
-        android:layout_below="@+id/textViewDictDialog"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textColor="@color/primary_light"
+        android:textStyle="bold" />
 </RelativeLayout>

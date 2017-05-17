@@ -3,8 +3,8 @@
     android:id="@+id/search_manga_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,9 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                android:ellipsize="end"
                 android:gravity="start"
-                android:textSize="20sp"
-                android:ellipsize="end"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/newest_chapter"

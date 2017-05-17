@@ -17,4 +17,12 @@ public class StringUtils {
         }
         return result;
     }
+
+    /*
+    * This function makes the input string shorter than 'length' if its length is longer than 'length'
+    * */
+    public static String shorten(String s, int length) {
+        if (s == null || s.length() < length) return s;
+        else return new StringBuilder(s.substring(0, length) + "...").toString();
+    }
 }

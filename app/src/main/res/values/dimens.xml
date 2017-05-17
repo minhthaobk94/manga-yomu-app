@@ -34,4 +34,12 @@
     <dimen name="sliding_slop">32dp</dimen>
     <dimen name="sliding_overlay_blur_size">4dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_mangaoverview_radius">0dp</dimen>
+    <dimen name="mangaoverview_cover_height">160dp</dimen>
+    <dimen name="mangaoverview_title_padding">10dp</dimen>
+    <dimen name="mangaoverview_title">15dp</dimen>
+    <dimen name="ic_mangaoverview_overflow_width">20dp</dimen>
+    <dimen name="ic_mangaoverview_overflow_height">30dp</dimen>
+    <dimen name="ic_mangaoverview_overflow_margin_top">10dp</dimen>
 </resources>

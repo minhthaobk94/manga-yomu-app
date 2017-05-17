@@ -1,103 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    >
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:id="@+id/author"
-                android:text="Author(s)"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Author(s)" />
+
             <TextView
-                android:layout_weight="2"
+                android:id="@+id/author_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/author_name"/>
+                android:layout_weight="2" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary_dark"/>
+            android:background="@color/primary_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:id="@+id/status"
-                android:text="Status"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Status" />
+
             <TextView
-                android:layout_weight="2"
+                android:id="@+id/manga_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/manga_status"/>
+                android:layout_weight="2" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary_dark"/>
+            android:background="@color/primary_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:id="@+id/genres"
-                android:text="Genres"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Genres" />
+
             <TextView
-                android:layout_weight="2"
+                android:id="@+id/manga_genres"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/manga_genres"/>
+                android:layout_weight="2" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary_dark"/>
+            android:background="@color/primary_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_weight="1"
+                android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/description"
-                android:text="Description"/>
+                android:layout_weight="1"
+                android:text="Description" />
+
             <TextView
-                android:layout_weight="2"
+                android:id="@+id/manga_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/manga_description"/>
+                android:layout_weight="2" />
         </LinearLayout>
     </LinearLayout>
 

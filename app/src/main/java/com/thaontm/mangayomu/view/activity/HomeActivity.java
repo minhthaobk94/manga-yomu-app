@@ -1,6 +1,5 @@
 package com.thaontm.mangayomu.view.activity;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ScrollingView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -16,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
@@ -26,7 +23,6 @@ import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +47,6 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
