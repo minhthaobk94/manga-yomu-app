@@ -13,4 +13,5 @@
     <string name="home">Home</string>
     <string name="dict">Dictionary</string>
     <string name="forward">Forward</string>
+    <string name="search_hint">Search...</string>
 </resources>

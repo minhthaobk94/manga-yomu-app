@@ -6,14 +6,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
@@ -86,10 +84,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_bar_menu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView =
-                (SearchView) MenuItemCompat.getActionView(searchItem);
+        /*final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -110,14 +105,17 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             public void onClick(View v) {
 
             }
-        });
+        });*/
         return true;
     }
 
-
-    public void notifyDataChanged() {
-        for (Fragment f : fragments) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+            startActivity(intent);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
