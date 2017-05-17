@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class MangaChapter extends MangaInfo implements Serializable{
+public class MangaChapter extends MangaInfo implements Serializable {
     private String chapterName;
     private String uploadedTime;
 }

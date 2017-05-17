@@ -23,7 +23,7 @@ public class MySearchMangaRecyclerViewAdapter extends RecyclerView.Adapter<MySea
 
     public MySearchMangaRecyclerViewAdapter(List<SearchedManga> mValues, OnItemClickListener mListener) {
         this.mValues = mValues;
-        this.mListener =  mListener;
+        this.mListener = mListener;
     }
 
     @Override
@@ -58,6 +58,10 @@ public class MySearchMangaRecyclerViewAdapter extends RecyclerView.Adapter<MySea
     }
 
 
+    public interface OnItemClickListener {
+        void onItemClick(MangaOverview mangaOverview);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mMangaName;
@@ -75,9 +79,5 @@ public class MySearchMangaRecyclerViewAdapter extends RecyclerView.Adapter<MySea
         public String toString() {
             return super.toString() + " '" + mMangaName.getText() + "'";
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(MangaOverview mangaOverview);
     }
 }

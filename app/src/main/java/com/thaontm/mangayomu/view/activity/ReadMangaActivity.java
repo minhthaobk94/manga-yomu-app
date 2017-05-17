@@ -2,17 +2,11 @@ package com.thaontm.mangayomu.view.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,7 +15,6 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 import com.roughike.bottombar.TabSelectionInterceptor;
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
@@ -34,27 +27,24 @@ import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
 public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor {
+    @BindView(R.id.image_page)
+    ImageView mImageView;
     private TextRecognizer detector;
     private BottomBar bottomNavigationView;
     private List<ChapterImage> chapterImages;
     private ChapterImage chapterImage;
     private KakalotMangaProvider kakalotMangaProvider;
     private int currentIndex = 0;
-    @BindView(R.id.image_page)
-    ImageView mImageView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

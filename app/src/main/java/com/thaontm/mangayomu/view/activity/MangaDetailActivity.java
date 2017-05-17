@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
-import com.thaontm.mangayomu.model.bean.ChapterImage;
 import com.thaontm.mangayomu.model.bean.MangaChapter;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.provider.Callback;
@@ -20,7 +18,6 @@ import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 import com.thaontm.mangayomu.view.fragment.MangaDetailFragment;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,14 +28,18 @@ import butterknife.ButterKnife;
  * Copyright thao 2017.
  */
 
-public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener{
+public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener {
 
     static final String MANGA_DETAIL = "manga_detail";
     static final String CHAPTER = "manga_chapter";
-    @BindView(R.id.manga_image) ImageView mMangaImage;
-    @BindView(R.id.detail_tabs) TabLayout mDetailTabs;
-    @BindView(R.id.view_pager) ViewPager mViewPager;
-    @BindView(R.id.manga_title) TextView mTitle;
+    @BindView(R.id.manga_image)
+    ImageView mMangaImage;
+    @BindView(R.id.detail_tabs)
+    TabLayout mDetailTabs;
+    @BindView(R.id.view_pager)
+    ViewPager mViewPager;
+    @BindView(R.id.manga_title)
+    TextView mTitle;
     private MangaDetailFragment mangaDetailFragment;
     private MangaChapterFragment mangaChapterFragment;
     private MangaDetail mangaDetail;

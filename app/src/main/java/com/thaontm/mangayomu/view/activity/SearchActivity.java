@@ -1,9 +1,8 @@
 package com.thaontm.mangayomu.view.activity;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import com.thaontm.mangayomu.R;
@@ -14,7 +13,6 @@ import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.view.fragment.MySearchMangaRecyclerViewAdapter;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.ButterKnife;

@@ -7,5 +7,6 @@ package com.thaontm.mangayomu.model.provider;
 
 public interface Callback<T> {
     void onSuccess(T result);
+
     void onError(Throwable what);
 }

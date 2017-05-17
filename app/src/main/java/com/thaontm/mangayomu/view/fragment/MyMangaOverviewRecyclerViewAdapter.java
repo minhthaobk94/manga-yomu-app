@@ -36,7 +36,7 @@ public class MyMangaOverviewRecyclerViewAdapter extends RecyclerView.Adapter<MyM
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        Picasso.with(holder.mMangaImage.getContext()).load(mValues.get(position).getImageUrl()).resize(400,600).centerCrop().into(holder.mMangaImage);
+        Picasso.with(holder.mMangaImage.getContext()).load(mValues.get(position).getImageUrl()).resize(400, 600).centerCrop().into(holder.mMangaImage);
         holder.mMangaName.setText(StringUtils.shorten(mValues.get(position).getTitle(), 17));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

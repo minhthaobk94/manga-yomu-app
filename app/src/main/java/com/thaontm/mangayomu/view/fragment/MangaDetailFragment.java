@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 
 public class MangaDetailFragment extends Fragment {
     private static final String MANGA_BASE_URL = "base_url";
-    private MangaDetail mangaDetail;
     @BindView(R.id.author_name)
     TextView mAuthor;
     @BindView(R.id.manga_status)
@@ -29,6 +28,7 @@ public class MangaDetailFragment extends Fragment {
     TextView mGenres;
     @BindView(R.id.manga_description)
     TextView mDescription;
+    private MangaDetail mangaDetail;
 
     public MangaDetailFragment() {
     }

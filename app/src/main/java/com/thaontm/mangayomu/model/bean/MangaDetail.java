@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class MangaDetail extends MangaInfo implements Serializable{
+public class MangaDetail extends MangaInfo implements Serializable {
     private String title;
     private String imageUrl;
     private String status;

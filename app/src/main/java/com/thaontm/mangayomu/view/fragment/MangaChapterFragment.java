@@ -1,6 +1,5 @@
 package com.thaontm.mangayomu.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +12,8 @@ import android.view.ViewGroup;
 
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaChapter;
-import com.thaontm.mangayomu.model.bean.MangaDetail;
-import com.thaontm.mangayomu.model.provider.Callback;
-import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 
 import java.util.List;
-
-import lombok.Setter;
 
 /**
  * A fragment representing a list of Items.
@@ -29,12 +23,21 @@ import lombok.Setter;
  */
 public class MangaChapterFragment extends Fragment {
 
-    public static MangaChapterFragment instance = null;
-
     private static final String MANGA_BASE_URL = "base_url";
     private static final String ARG_COLUMN_COUNT = "column-count";
+    public static MangaChapterFragment instance = null;
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private List<MangaChapter> mangaChapters;
+    private MyChapterRecyclerViewAdapter myChapterRecyclerViewAdapter;
+    private RecyclerView recyclerView;
+    public MangaChapterFragment() {
+        instance = this;
+    }
+
+    public static MangaChapterFragment newInstance() {
+        return new MangaChapterFragment();
+    }
 
     public void setMangaChapters(List<MangaChapter> mangaChapters) {
         if (recyclerView != null) {
@@ -42,18 +45,6 @@ public class MangaChapterFragment extends Fragment {
         } else {
             this.mangaChapters = mangaChapters;
         }
-    }
-
-    private List<MangaChapter> mangaChapters;
-    private MyChapterRecyclerViewAdapter myChapterRecyclerViewAdapter;
-    private RecyclerView recyclerView;
-
-    public static MangaChapterFragment newInstance() {
-        return new MangaChapterFragment();
-    }
-
-    public MangaChapterFragment() {
-        instance = this;
     }
 
     @Override
