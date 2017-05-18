@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
@@ -29,7 +30,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
     private MangaOverview mangaOverview;
 
     private Toolbar mToolbar;
-    private SearchView searchView;
+    private MaterialSearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +70,51 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
             }
         });
 
-        setTitle("Search");
+        // set title
+        setTitle(keyword);
 
-        searchView = (SearchView) findViewById(R.id.search_view);
-        searchView.setLayoutParams(new Toolbar.LayoutParams(Gravity.RIGHT));
+        // search view
+        searchView = (MaterialSearchView) findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                // Toast.makeText(getApplicationContext(), "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
+                // change title
+                setTitle(query);
+                // do searching
+                kakalotMangaProvider.search(query, new Callback<List<SearchedManga>>() {
+                    @Override
+                    public void onSuccess(final List<SearchedManga> result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MySearchMangaRecyclerViewAdapter adapter = new MySearchMangaRecyclerViewAdapter(result, SearchActivity.this);
+                                recyclerView.setAdapter(adapter);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(Throwable what) {
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Toast.makeText(getApplicationContext(), "onQueryTextChange", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search_bar, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
+        return true;
     }
 
     @Override

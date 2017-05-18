@@ -12,18 +12,23 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="false">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <FrameLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tool_bar_height"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <android.support.v7.widget.SearchView
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_bar_height" />
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-        </android.support.v7.widget.Toolbar>
+        </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -33,7 +38,7 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.thaontm.mangayomu.view.activity.SearchActivity"
-        tools:listitem="@layout/search_manga_item"></android.support.v7.widget.RecyclerView>
+        tools:listitem="@layout/item_search_manga"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

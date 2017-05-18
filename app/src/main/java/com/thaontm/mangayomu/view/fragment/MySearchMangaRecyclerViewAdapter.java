@@ -29,7 +29,7 @@ public class MySearchMangaRecyclerViewAdapter extends RecyclerView.Adapter<MySea
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.search_manga_item, parent, false);
+                .inflate(R.layout.item_search_manga, parent, false);
         return new ViewHolder(view);
     }
 
