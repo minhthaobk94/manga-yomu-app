@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.roger.catloadinglibrary.CatLoadingView;
@@ -19,8 +18,8 @@ import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.model.bean.translation.Translation;
 import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
+import com.thaontm.mangayomu.model.bean.translation.TranslationData;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.rest.ApiClient;
@@ -87,10 +86,8 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         if (mCatLoadingView.getDialog() != null) {
             mCatLoadingView.getDialog().setCanceledOnTouchOutside(false);
         } else {
-            Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show();
         }
-
-        //TestAPI();
     }
 
     @Override
@@ -167,6 +164,25 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
     }
 
+    private void TestAPI() {
+        final String API_KEY = getResources().getString(R.string.API_KEY);
+        final String SOURCE = getResources().getString(R.string.SOURCE_LANGUAGE);
+        final String TARGET = getResources().getString(R.string.TARGET_LANGUAGE);
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<TranslationResponse> call = apiService.getTranslationResponse(API_KEY, SOURCE, TARGET, "how are you");
+        call.enqueue(new retrofit2.Callback<TranslationResponse>() {
+            @Override
+            public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
+                List<TranslationData> translationData = response.body().getData().getTranslations();
+            }
+
+            @Override
+            public void onFailure(Call<TranslationResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
     static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -194,25 +210,5 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-    }
-
-    private void TestAPI() {
-        String TAG = "TestAPI";
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-
-        Call<TranslationResponse> call = apiService.getTranslationResponse("how are you");
-        call.enqueue(new retrofit2.Callback<TranslationResponse>() {
-            @Override
-            public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
-                List<Translation> translations = response.body().getTranslations();
-                Toast.makeText(getApplicationContext(), translations.get(0).getTranslatedText(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<TranslationResponse> call, Throwable t) {
-
-            }
-        });
     }
 }

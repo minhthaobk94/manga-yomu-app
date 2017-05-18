@@ -20,19 +20,20 @@ import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.ChapterImage;
 import com.thaontm.mangayomu.model.bean.MangaChapter;
+import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
+import com.thaontm.mangayomu.model.bean.translation.Translation;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.rest.ApiClient;
+import com.thaontm.mangayomu.rest.ApiInterface;
 import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Response;
 
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
@@ -152,42 +153,67 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         return false;
     }
 
-    public void translate(final String input) throws IOException {
-        Document doc;
-        Connection.Response response = Jsoup.connect("https://www.engtoviet.com/translate.php").requestBody("q=" + input)
-                .method(Connection.Method.POST).execute();
+    /*
+    * Translate using Google Translate API
+    * */
+    public void translate(final String input) {
+        final String API_KEY = getResources().getString(R.string.API_KEY);
+        final String SOURCE = getResources().getString(R.string.SOURCE_LANGUAGE);
+        final String TARGET = getResources().getString(R.string.TARGET_LANGUAGE);
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<TranslationResponse> call = apiService.getTranslationResponse(API_KEY, SOURCE, TARGET, input);
+        call.enqueue(new retrofit2.Callback<TranslationResponse>() {
+            @Override
+            public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
+                Translation translation = response.body().getData();
+                if (translation != null) {
+                    Toast.makeText(getApplicationContext(), translation.getTranslations().get(0).getTranslatedText(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        doc = response.parse();
-        String session = response.cookie("PHPSESSID");
+            @Override
+            public void onFailure(Call<TranslationResponse> call, Throwable t) {
 
-        String all = doc.toString();
-        int scriptIndex = all.indexOf("sTs (\"target_text_1\", \"en_vn\",");
-
-        if (scriptIndex < 0) {
-            String[] results = doc.getElementsByClass("result_text").text().split(";");
-            showResult(results.length > 0 ? results[0] : null);
-        }
-
-        String content = all.substring(scriptIndex + "sTs (\"target_text_1\", \"en_vn\",".length(),
-                all.indexOf(");", scriptIndex));
-
-        String[] parts = content.split(",");
-        for (int i = 0; i < parts.length; i++) {
-            parts[i] = parts[i].replace("\"", "").trim();
-        }
-
-        String url = String.format("https://www.engtoviet.com/smt_translate.api.php?lang=en_vn&q=" + parts[0].replace("==", "")
-                + "&var=" + parts[1] + "&key=" + parts[2]);
-        doc = Jsoup
-                .connect(url)
-                .cookie("PHPSESSID", session).get();
-
-        String result = doc.toString();
-        scriptIndex = result.indexOf("translatecallback(\"");
-        result = result.substring(scriptIndex + "translatecallback(\"".length(), result.indexOf("\")"));
-
-        showResult(result);
+            }
+        });
     }
+
+//    public void translate(final String input) throws IOException {
+//        Document doc;
+//        Connection.Response response = Jsoup.connect("https://www.engtoviet.com/translate.php").requestBody("q=" + input)
+//                .method(Connection.Method.POST).execute();
+//
+//        doc = response.parse();
+//        String session = response.cookie("PHPSESSID");
+//
+//        String all = doc.toString();
+//        int scriptIndex = all.indexOf("sTs (\"target_text_1\", \"en_vn\",");
+//
+//        if (scriptIndex < 0) {
+//            String[] results = doc.getElementsByClass("result_text").text().split(";");
+//            showResult(results.length > 0 ? results[0] : null);
+//        }
+//
+//        String content = all.substring(scriptIndex + "sTs (\"target_text_1\", \"en_vn\",".length(),
+//                all.indexOf(");", scriptIndex));
+//
+//        String[] parts = content.split(",");
+//        for (int i = 0; i < parts.length; i++) {
+//            parts[i] = parts[i].replace("\"", "").trim();
+//        }
+//
+//        String url = String.format("https://www.engtoviet.com/smt_translate.api.php?lang=en_vn&q=" + parts[0].replace("==", "")
+//                + "&var=" + parts[1] + "&key=" + parts[2]);
+//        doc = Jsoup
+//                .connect(url)
+//                .cookie("PHPSESSID", session).get();
+//
+//        String result = doc.toString();
+//        scriptIndex = result.indexOf("translatecallback(\"");
+//        result = result.substring(scriptIndex + "translatecallback(\"".length(), result.indexOf("\")"));
+//
+//        showResult(result);
+//    }
 
     private void showResult(final String result) {
         runOnUiThread(new Runnable() {

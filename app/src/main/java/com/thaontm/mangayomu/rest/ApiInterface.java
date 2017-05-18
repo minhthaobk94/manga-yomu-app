@@ -6,12 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-/**
- * Created by thao on 5/18/2017.
- * Copyright thao 2017.
- */
-
 public interface ApiInterface {
-    @GET("")
-    Call<TranslationResponse> getTranslationResponse(@Query("q") String text);
+    @GET("v2/")
+    Call<TranslationResponse> getTranslationResponse(@Query("key") String API_KEY, @Query("source") String source, @Query("target") String target, @Query("q") String text);
 }

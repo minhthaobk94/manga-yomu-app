@@ -14,4 +14,7 @@
     <string name="dict">Dictionary</string>
     <string name="forward">Forward</string>
     <string name="search_hint">Search...</string>
+    <string name="API_KEY">AIzaSyAJGBILuWZOKQ5j8HGf9AxDUnfPufwqn6E</string>
+    <string name="SOURCE_LANGUAGE">en</string>
+    <string name="TARGET_LANGUAGE">vi</string>
 </resources>

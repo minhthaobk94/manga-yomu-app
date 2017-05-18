@@ -1,18 +1,8 @@
 package com.thaontm.mangayomu.model.bean.translation;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-
-/**
- * Created by thao on 5/18/2017.
- * Copyright thao 2017.
- */
-
+@lombok.Data
 public class Translation {
-    @SerializedName("translatedText")
-    @Getter
-    @Setter
-    String translatedText;
+    private List<TranslationData> translations;
 }
