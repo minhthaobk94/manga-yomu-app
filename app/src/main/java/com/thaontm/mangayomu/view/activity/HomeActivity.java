@@ -13,17 +13,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.roger.catloadinglibrary.CatLoadingView;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.bean.translation.TranslationData;
+import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.rest.ApiClient;
 import com.thaontm.mangayomu.rest.ApiInterface;
+import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     private MangaOverviewFragment newMangaOverviewFragment;
     private MangaOverviewFragment popularMangaOverviewFragment;
 
-    private CatLoadingView mCatLoadingView;
+    private BusyIndicatorManager mBusyIndicatorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,26 +81,21 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             }
         });
 
-        // cat loading view
-        mCatLoadingView = new CatLoadingView();
-        if (mCatLoadingView.getDialog() != null) {
-            mCatLoadingView.getDialog().setCanceledOnTouchOutside(false);
-        } else {
-            // Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show();
-        }
+        // busy indicator
+        mBusyIndicatorManager = new BusyIndicatorManager(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         // show loading
-        mCatLoadingView.show(getSupportFragmentManager(), "");
+        mBusyIndicatorManager.showBusyIndicator();
         // get data
         kakalotMangaProvider.getHome(new Callback<MangaHome>() {
             @Override
             public void onSuccess(final MangaHome result) {
                 // hide loading
-                mCatLoadingView.dismiss();
+                mBusyIndicatorManager.hideBusyIndicator();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
