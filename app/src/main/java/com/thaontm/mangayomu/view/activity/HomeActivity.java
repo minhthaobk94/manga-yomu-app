@@ -19,12 +19,19 @@ import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
+import com.thaontm.mangayomu.model.bean.translation.Translation;
+import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.rest.ApiClient;
+import com.thaontm.mangayomu.rest.ApiInterface;
 import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener {
 
@@ -83,6 +90,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show();
         }
 
+        //TestAPI();
     }
 
     @Override
@@ -186,5 +194,25 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    private void TestAPI() {
+        String TAG = "TestAPI";
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+
+        Call<TranslationResponse> call = apiService.getTranslationResponse("how are you");
+        call.enqueue(new retrofit2.Callback<TranslationResponse>() {
+            @Override
+            public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
+                List<Translation> translations = response.body().getTranslations();
+                Toast.makeText(getApplicationContext(), translations.get(0).getTranslatedText(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<TranslationResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

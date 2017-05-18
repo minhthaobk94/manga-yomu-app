@@ -57,4 +57,8 @@ dependencies {
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     // cat loading
     compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
+    // retrofit, gson
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 }
