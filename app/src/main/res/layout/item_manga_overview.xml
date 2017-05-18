@@ -10,8 +10,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        card_view:cardElevation="@dimen/card_mangaoverview_elevation"
-        card_view:cardCornerRadius="@dimen/card_mangaoverview_radius">
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="@dimen/card_mangaoverview_radius"
+        card_view:cardElevation="@dimen/card_mangaoverview_elevation">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,8 +23,8 @@
                 android:id="@+id/manga_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/mangaoverview_cover_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:scaleType="fitXY" />
 
             <TextView

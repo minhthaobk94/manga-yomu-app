@@ -39,12 +39,20 @@ public class MyMangaOverviewRecyclerViewAdapter extends RecyclerView.Adapter<MyM
         Picasso.with(holder.mMangaImage.getContext()).load(mValues.get(position).getImageUrl()).resize(400, 600).centerCrop().into(holder.mMangaImage);
         holder.mMangaName.setText(StringUtils.shorten(mValues.get(position).getTitle(), 13));
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mMangaName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
+                    mListener.onMangaOverviewInteraction(holder.mItem);
+                }
+            }
+        });
+        holder.mMangaImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
                     mListener.onMangaOverviewInteraction(holder.mItem);
                 }
             }

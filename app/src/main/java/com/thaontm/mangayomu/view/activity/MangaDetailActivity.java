@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
@@ -42,8 +41,6 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
     TabLayout mDetailTabs;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
-    @BindView(R.id.manga_title)
-    TextView mTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -61,8 +58,6 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
         mangaDetail = (MangaDetail) getIntent().getSerializableExtra(MANGA_DETAIL);
         mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
         Picasso.with(this).load(mangaDetail.getImageUrl()).fit().into(mMangaImage);
-        mTitle = (TextView) findViewById(R.id.manga_title);
-        mTitle.setText(mangaDetail.getTitle());
         mangaChapterFragment = new MangaChapterFragment();
 
         kakalotMangaProvider = new KakalotMangaProvider();
