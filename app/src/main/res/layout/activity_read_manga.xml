@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.thaontm.mangayomu.view.activity.ReadMangaActivity">
 
     <ImageView
         android:id="@+id/image_page"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation_bar" />
+        android:layout_height="0dp"
+        android:layout_above="@+id/bottom_navigation_bar"
+        android:layout_weight="1"
+        android:scaleType="fitXY" />
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
         android:background="@color/primary_dark"
-        app:bb_activeTabColor="@color/accent_light"
+        app:bb_activeTabColor="@color/white"
         app:bb_behavior="iconsOnly"
-        app:bb_inActiveTabColor="@color/accent_light"
+        app:bb_inActiveTabColor="@color/white"
         app:bb_showShadow="false"
         app:bb_tabXmlResource="@xml/bottom_tabs" />
-
-</RelativeLayout>
+</LinearLayout>

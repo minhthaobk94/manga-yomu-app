@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
     <tab
-        icon="@mipmap/ic_back_48"
+        icon="@mipmap/ic_arrow_left_white"
         id="@+id/action_previous" />
     <tab
-        icon="@mipmap/ic_home_48"
+        icon="@mipmap/ic_home_white"
         id="@+id/action_home" />
     <tab
-        icon="@mipmap/ic_forward_48"
+        icon="@mipmap/ic_arrow_right_white"
         id="@+id/action_forward" />
 </tabs>
