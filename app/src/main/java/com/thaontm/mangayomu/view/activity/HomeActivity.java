@@ -11,8 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.roger.catloadinglibrary.CatLoadingView;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
@@ -34,6 +36,8 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     private KakalotMangaProvider kakalotMangaProvider;
     private MangaOverviewFragment newMangaOverviewFragment;
     private MangaOverviewFragment popularMangaOverviewFragment;
+
+    private CatLoadingView mCatLoadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +74,28 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
                 return false;
             }
         });
+
+        // cat loading view
+        mCatLoadingView = new CatLoadingView();
+        if (mCatLoadingView.getDialog() != null) {
+            mCatLoadingView.getDialog().setCanceledOnTouchOutside(false);
+        } else {
+            Toast.makeText(this, "NULL", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        // show loading
+        mCatLoadingView.show(getSupportFragmentManager(), "");
+        // get data
         kakalotMangaProvider.getHome(new Callback<MangaHome>() {
             @Override
             public void onSuccess(final MangaHome result) {
+                // hide loading
+                mCatLoadingView.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
