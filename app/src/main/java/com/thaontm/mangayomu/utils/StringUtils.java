@@ -25,4 +25,9 @@ public class StringUtils {
         if (s == null || s.length() < length) return s;
         else return new StringBuilder(s.substring(0, length) + "...").toString();
     }
+
+    public static String removeLineBreaks(String text) {
+        if (text == null || text.length() == 0) return text;
+        else return text.replace("\n", " ").replace("\r", " ");
+    }
 }

@@ -5,10 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
@@ -20,12 +26,14 @@ import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.ChapterImage;
 import com.thaontm.mangayomu.model.bean.MangaChapter;
-import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
+import com.thaontm.mangayomu.model.bean.TouchInfo;
 import com.thaontm.mangayomu.model.bean.translation.Translation;
+import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.rest.ApiClient;
 import com.thaontm.mangayomu.rest.ApiInterface;
+import com.thaontm.mangayomu.utils.StringUtils;
 import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 
 import java.util.List;
@@ -38,56 +46,30 @@ import retrofit2.Response;
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
 public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor {
+    static final String TAG = ReadMangaActivity.class.getName();
     @BindView(R.id.image_page)
     ImageView mImageView;
+    @BindView(R.id.llReadManga)
+    LinearLayout llReadManga;
+    Snackbar snackbar;
+
+    boolean isActionDown = false, isActionUp = false;
+    float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
     private TextRecognizer detector;
     private BottomBar bottomNavigationView;
     private List<ChapterImage> chapterImages;
     private ChapterImage chapterImage;
     private KakalotMangaProvider kakalotMangaProvider;
     private int currentIndex = 0;
+    private SparseArray<TextBlock> recognizedTextBlocks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_manga);
-        ImageView imageView = (ImageView) findViewById(R.id.image_page);
-        extractText(imageView);
         ButterKnife.bind(this);
 
         MangaChapter mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = (ImageView) findViewById(R.id.image_page);
-                detector = new TextRecognizer.Builder(getApplicationContext()).build();
-                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-                SparseArray<TextBlock> textBlocks = detector.detect(frame);
-                String blocks = "";
-                for (int index = 0; index < textBlocks.size(); index++) {
-                    TextBlock tBlock = textBlocks.valueAt(index);
-                    blocks = blocks + tBlock.getValue() + ".";
-                }
-
-                if (blocks.endsWith("."))
-                    blocks = blocks.substring(0, blocks.length() - 1);
-
-                final String finalBlocks = blocks;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            translate(finalBlocks);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-            }
-        });
-
         kakalotMangaProvider = new KakalotMangaProvider();
         kakalotMangaProvider.getMangaChapterImages(mangaChapter.getBaseUrl(), new Callback<List<ChapterImage>>() {
             @Override
@@ -110,21 +92,63 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         });
         bottomNavigationView = (BottomBar) findViewById(R.id.bottom_navigation_bar);
         bottomNavigationView.setTabSelectionInterceptor(this);
-    }
 
+        mImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        isActionDown = true;
+                        x1 = event.getX();
+                        y1 = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        isActionDown = false;
+                        isActionUp = true;
+                        x2 = event.getX();
+                        y2 = event.getY();
+                        break;
+                }
 
-    private void extractText(ImageView imageView) {
-//        imageView.setImageResource(R.drawable.page2);
-//        detector = new TextRecognizer.Builder(getApplicationContext()).build();
-//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.page2);
-//        Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-//        SparseArray<TextBlock> textBlocks = detector.detect(frame);
-//        String blocks = "";
-//        for (int index = 0; index < textBlocks.size(); index++) {
-//            TextBlock tBlock = textBlocks.valueAt(index);
-//            blocks = blocks + tBlock.getValue() + "\n" + "\n";
-//        }
-//        Toast.makeText(this, blocks.toString(), Toast.LENGTH_SHORT).show();
+                if (isActionUp) {
+                    // get recognized text blocks
+                    recognizedTextBlocks = getRecognizedTextBlocks();
+                    SparseArray<TextBlock> touchedTextBlock = getTouchedTextBlocks(new TouchInfo(x1, y1, x2, y2));
+                    final StringBuilder selectedText = new StringBuilder();
+                    for (int i = 0; i < touchedTextBlock.size(); i++) {
+                        selectedText.append(touchedTextBlock.get(i).getValue());
+                    }
+                    // translate
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                translate(StringUtils.removeLineBreaks(selectedText.toString()));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+                    isActionUp = false;
+                    x1 = y1 = x2 = y2 = 0.0f;
+                }
+                return true;
+            }
+        });
+
+        // set up snackbar
+        snackbar = Snackbar.make(llReadManga, "Text", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.close, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
     }
 
     @Override
@@ -167,7 +191,9 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
             public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
                 Translation translation = response.body().getData();
                 if (translation != null) {
-                    Toast.makeText(getApplicationContext(), translation.getTranslations().get(0).getTranslatedText(), Toast.LENGTH_SHORT).show();
+                    // Snackbar.make(llReadManga, translation.getTranslations().get(0).getTranslatedText(), Snackbar.LENGTH_LONG).show();
+                    snackbar.setText(translation.getTranslations().get(0).getTranslatedText());
+                    snackbar.show();
                 }
             }
 
@@ -178,42 +204,33 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         });
     }
 
-//    public void translate(final String input) throws IOException {
-//        Document doc;
-//        Connection.Response response = Jsoup.connect("https://www.engtoviet.com/translate.php").requestBody("q=" + input)
-//                .method(Connection.Method.POST).execute();
-//
-//        doc = response.parse();
-//        String session = response.cookie("PHPSESSID");
-//
-//        String all = doc.toString();
-//        int scriptIndex = all.indexOf("sTs (\"target_text_1\", \"en_vn\",");
-//
-//        if (scriptIndex < 0) {
-//            String[] results = doc.getElementsByClass("result_text").text().split(";");
-//            showResult(results.length > 0 ? results[0] : null);
-//        }
-//
-//        String content = all.substring(scriptIndex + "sTs (\"target_text_1\", \"en_vn\",".length(),
-//                all.indexOf(");", scriptIndex));
-//
-//        String[] parts = content.split(",");
-//        for (int i = 0; i < parts.length; i++) {
-//            parts[i] = parts[i].replace("\"", "").trim();
-//        }
-//
-//        String url = String.format("https://www.engtoviet.com/smt_translate.api.php?lang=en_vn&q=" + parts[0].replace("==", "")
-//                + "&var=" + parts[1] + "&key=" + parts[2]);
-//        doc = Jsoup
-//                .connect(url)
-//                .cookie("PHPSESSID", session).get();
-//
-//        String result = doc.toString();
-//        scriptIndex = result.indexOf("translatecallback(\"");
-//        result = result.substring(scriptIndex + "translatecallback(\"".length(), result.indexOf("\")"));
-//
-//        showResult(result);
-//    }
+    private SparseArray<TextBlock> getRecognizedTextBlocks() {
+        ImageView imageView = (ImageView) findViewById(R.id.image_page);
+        detector = new TextRecognizer.Builder(getApplicationContext()).build();
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap;
+        if (bitmapDrawable != null) {
+            bitmap = bitmapDrawable.getBitmap();
+        } else {
+            return new SparseArray<>();
+        }
+        Frame frame = new Frame.Builder().setBitmap(bitmap).build();
+        return detector.detect(frame);
+    }
+
+    private SparseArray<TextBlock> getTouchedTextBlocks(TouchInfo touchInfo) {
+        SparseArray<TextBlock> touchedTextBlocks = new SparseArray<>();
+
+        int i = 0;
+        for (int index = 0; index < recognizedTextBlocks.size(); index++) {
+            TextBlock tBlock = recognizedTextBlocks.valueAt(index);
+            if (tBlock.getBoundingBox().intersect(touchInfo.getRect())) {
+                touchedTextBlocks.put(i++, tBlock);
+            }
+            Log.d(TAG, tBlock.getValue());
+        }
+        return touchedTextBlocks;
+    }
 
     private void showResult(final String result) {
         runOnUiThread(new Runnable() {
