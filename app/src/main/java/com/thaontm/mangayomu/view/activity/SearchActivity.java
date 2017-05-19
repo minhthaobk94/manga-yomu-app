@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.thaontm.mangayomu.R;
@@ -16,6 +17,7 @@ import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.model.bean.SearchedManga;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.view.fragment.MySearchMangaRecyclerViewAdapter;
 
 import java.util.List;
@@ -25,12 +27,12 @@ import butterknife.ButterKnife;
 public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener {
     static final String KEYWORD = "keyword";
     private RecyclerView recyclerView = null;
-    private List<MangaOverview> mangaOverviews = null;
     private KakalotMangaProvider kakalotMangaProvider;
-    private MangaOverview mangaOverview;
 
     private Toolbar mToolbar;
     private MaterialSearchView searchView;
+    private BusyIndicatorManager busyIndicatorManager;
+    private TextView tvNoItemsFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +40,33 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         setContentView(R.layout.activity_search);
         recyclerView = ButterKnife.findById(this, R.id.list);
         kakalotMangaProvider = new KakalotMangaProvider();
+        tvNoItemsFound = (TextView) findViewById(R.id.tvNoItemsFound);
 
+        // init BusyIndicatorManager
+        busyIndicatorManager = new BusyIndicatorManager(this);
+
+        // do searching
+        //// show loading indicator
+        busyIndicatorManager.showBusyIndicator();
+        //// search
         final Intent intent = getIntent();
         String keyword = intent.getStringExtra(KEYWORD);
         kakalotMangaProvider.search(keyword, new Callback<List<SearchedManga>>() {
             @Override
             public void onSuccess(final List<SearchedManga> result) {
+                // hide loading indicator
+                busyIndicatorManager.hideBusyIndicator();
+                // update view
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        MySearchMangaRecyclerViewAdapter adapter = new MySearchMangaRecyclerViewAdapter(result, SearchActivity.this);
-                        recyclerView.setAdapter(adapter);
+                        updateViewAfterSearching(result);
                     }
                 });
             }
 
             @Override
             public void onError(Throwable what) {
-
             }
         });
 
@@ -78,18 +89,21 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-                // Toast.makeText(getApplicationContext(), "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
                 // change title
                 setTitle(query);
                 // do searching
+                //// show loading indicator
+                busyIndicatorManager.showBusyIndicator();
+                //// search
                 kakalotMangaProvider.search(query, new Callback<List<SearchedManga>>() {
                     @Override
                     public void onSuccess(final List<SearchedManga> result) {
+                        // hide loading indicator
+                        busyIndicatorManager.hideBusyIndicator();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                MySearchMangaRecyclerViewAdapter adapter = new MySearchMangaRecyclerViewAdapter(result, SearchActivity.this);
-                                recyclerView.setAdapter(adapter);
+                                updateViewAfterSearching(result);
                             }
                         });
                     }
@@ -103,7 +117,6 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Toast.makeText(getApplicationContext(), "onQueryTextChange", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -115,6 +128,18 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         MenuItem item = menu.findItem(R.id.action_search);
         searchView.setMenuItem(item);
         return true;
+    }
+
+    private void updateViewAfterSearching(List<SearchedManga> result) {
+        if (recyclerView == null || tvNoItemsFound == null) return;
+        // show no items found
+        if (result.size() == 0) {
+            tvNoItemsFound.setVisibility(View.VISIBLE);
+        } else {
+            tvNoItemsFound.setVisibility(View.GONE);
+        }
+        // update recycler view
+        recyclerView.setAdapter(new MySearchMangaRecyclerViewAdapter(result, SearchActivity.this));
     }
 
     @Override
@@ -134,7 +159,6 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
             @Override
             public void onError(Throwable what) {
-
             }
         });
     }
