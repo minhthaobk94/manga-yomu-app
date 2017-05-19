@@ -17,20 +17,13 @@ import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
-import com.thaontm.mangayomu.model.bean.translation.TranslationData;
-import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
-import com.thaontm.mangayomu.rest.ApiClient;
-import com.thaontm.mangayomu.rest.ApiInterface;
 import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener {
 
@@ -53,6 +46,9 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         popularMangaOverviewFragment = new MangaOverviewFragment();
         kakalotMangaProvider = new KakalotMangaProvider();
 
+        // init BusyIndicator
+        mBusyIndicatorManager = new BusyIndicatorManager(this);
+
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
 
@@ -66,7 +62,6 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Toast.makeText(getApplicationContext(), "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                 String keyword = query;
                 intent.putExtra(SearchActivity.KEYWORD, keyword);
@@ -76,13 +71,9 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Toast.makeText(getApplicationContext(), "onQueryTextChange", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
-
-        // busy indicator
-        mBusyIndicatorManager = new BusyIndicatorManager(this);
     }
 
     @Override
@@ -107,7 +98,8 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
             @Override
             public void onError(Throwable what) {
-
+                // hide loading
+                mBusyIndicatorManager.hideBusyIndicator();
             }
         });
     }
@@ -157,25 +149,6 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             }
         });
 
-    }
-
-    private void TestAPI() {
-        final String API_KEY = getResources().getString(R.string.API_KEY);
-        final String SOURCE = getResources().getString(R.string.SOURCE_LANGUAGE);
-        final String TARGET = getResources().getString(R.string.TARGET_LANGUAGE);
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<TranslationResponse> call = apiService.getTranslationResponse(API_KEY, SOURCE, TARGET, "how are you");
-        call.enqueue(new retrofit2.Callback<TranslationResponse>() {
-            @Override
-            public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
-                List<TranslationData> translationData = response.body().getData().getTranslations();
-            }
-
-            @Override
-            public void onFailure(Call<TranslationResponse> call, Throwable t) {
-
-            }
-        });
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
@@ -46,7 +46,6 @@ import retrofit2.Response;
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
 public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor {
-    static final String TAG = ReadMangaActivity.class.getName();
     @BindView(R.id.image_page)
     ImageView mImageView;
     @BindView(R.id.llReadManga)
@@ -145,41 +144,59 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                 snackbar.dismiss();
             }
         });
-        View view = snackbar.getView();
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+        View snackbarView = snackbar.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
         params.gravity = Gravity.TOP;
-        view.setLayoutParams(params);
+        snackbarView.setLayoutParams(params);
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setMaxLines(5);
     }
 
     @Override
     public void onListFragmentInteraction(MangaChapter item) {
-
     }
 
     @Override
     public boolean shouldInterceptTabSelection(@IdRes int oldTabId, @IdRes int newTabId) {
         if (newTabId == R.id.action_previous) {
+            // close Snackbar
+            closeSnackBar();
             if (currentIndex > 0) {
                 chapterImage = chapterImages.get(--currentIndex);
                 Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView);
 
             }
         } else if (newTabId == R.id.action_forward) {
+            // close Snackbar
+            closeSnackBar();
             if (currentIndex < chapterImages.size() - 1) {
                 chapterImage = chapterImages.get(++currentIndex);
                 Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView);
 
             }
         } else if (newTabId == R.id.action_home) {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
         return false;
     }
 
+    private void closeSnackBar() {
+        if (snackbar != null && snackbar.isShown()) {
+            snackbar.dismiss();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        closeSnackBar();
+    }
+
     /*
-    * Translate using Google Translate API
-    * */
+        * Translate using Google Translate API
+        * */
     public void translate(final String input) {
         final String API_KEY = getResources().getString(R.string.API_KEY);
         final String SOURCE = getResources().getString(R.string.SOURCE_LANGUAGE);
@@ -191,9 +208,11 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
             public void onResponse(Call<TranslationResponse> call, Response<TranslationResponse> response) {
                 Translation translation = response.body().getData();
                 if (translation != null) {
-                    // Snackbar.make(llReadManga, translation.getTranslations().get(0).getTranslatedText(), Snackbar.LENGTH_LONG).show();
-                    snackbar.setText(translation.getTranslations().get(0).getTranslatedText());
-                    snackbar.show();
+                    String result = translation.getTranslations().get(0).getTranslatedText().trim();
+                    if (result.length() > 0) {
+                        snackbar.setText(result);
+                        snackbar.show();
+                    }
                 }
             }
 
@@ -227,7 +246,6 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
             if (tBlock.getBoundingBox().intersect(touchInfo.getRect())) {
                 touchedTextBlocks.put(i++, tBlock);
             }
-            Log.d(TAG, tBlock.getValue());
         }
         return touchedTextBlocks;
     }
