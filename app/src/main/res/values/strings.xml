@@ -18,4 +18,5 @@
     <string name="SOURCE_LANGUAGE">en</string>
     <string name="TARGET_LANGUAGE">vi</string>
     <string name="close">X</string>
+    <string name="no_items_found">No items found</string>
 </resources>
