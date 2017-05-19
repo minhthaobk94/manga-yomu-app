@@ -81,6 +81,9 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
             }
         });
 
+        // init BusyIndicatorManager
+        busyIndicatorManager = new BusyIndicatorManager(this);
+
         // set title
         setTitle(keyword);
 
