@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.thaontm.mangayomu.R;
@@ -24,7 +25,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener {
+public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener, KakalotMangaProvider.KakalotMangaProviderListener {
     static final String KEYWORD = "keyword";
     private RecyclerView recyclerView = null;
     private KakalotMangaProvider kakalotMangaProvider;
@@ -39,7 +40,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         recyclerView = ButterKnife.findById(this, R.id.list);
-        kakalotMangaProvider = new KakalotMangaProvider();
+        kakalotMangaProvider = new KakalotMangaProvider(this);
         tvNoItemsFound = (TextView) findViewById(R.id.tvNoItemsFound);
 
         // init BusyIndicatorManager
@@ -160,6 +161,16 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
             @Override
             public void onError(Throwable what) {
+            }
+        });
+    }
+
+    @Override
+    public void onParsingError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -14,18 +14,16 @@ public class BusyIndicatorManager {
 
     public BusyIndicatorManager(Activity activity) {
         this.mCurrentActivity = activity;
+        this.mBusyIndicator = new BusyIndicator(mCurrentActivity);
     }
-
 
     //region INavigator implement
 
     public void showBusyIndicator() {
-        if (mCurrentActivity != null) {
-            mBusyIndicator = new BusyIndicator(mCurrentActivity);
+        if (mCurrentActivity != null && mBusyIndicator !=null && !mBusyIndicator.isShowing()) {
             mBusyIndicator.show();
         }
     }
-
 
     public void hideBusyIndicator() {
         if (isBusyIndicatorShowing()) {

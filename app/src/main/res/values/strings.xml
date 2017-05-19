@@ -19,4 +19,5 @@
     <string name="TARGET_LANGUAGE">vi</string>
     <string name="close">X</string>
     <string name="no_items_found">No items found</string>
+    <string name="NETWORK_ERR_MESSAGE">Please check your internet connection</string>
 </resources>

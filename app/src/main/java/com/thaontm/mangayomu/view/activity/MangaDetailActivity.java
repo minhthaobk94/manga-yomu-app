@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.thaontm.mangayomu.R;
@@ -31,7 +32,7 @@ import butterknife.ButterKnife;
  * Copyright thao 2017.
  */
 
-public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener {
+public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, KakalotMangaProvider.KakalotMangaProviderListener {
 
     static final String MANGA_DETAIL = "manga_detail";
     static final String CHAPTER = "manga_chapter";
@@ -60,7 +61,7 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
         Picasso.with(this).load(mangaDetail.getImageUrl()).fit().into(mMangaImage);
         mangaChapterFragment = new MangaChapterFragment();
 
-        kakalotMangaProvider = new KakalotMangaProvider();
+        kakalotMangaProvider = new KakalotMangaProvider(this);
         kakalotMangaProvider.getMangaChapters(mangaDetail.getBaseUrl(), new Callback<List<MangaChapter>>() {
             @Override
             public void onSuccess(final List<MangaChapter> result) {
@@ -145,6 +146,16 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
                     collapsingToolbar.setTitle(" ");
                     isShow = false;
                 }
+            }
+        });
+    }
+
+    @Override
+    public void onParsingError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
             }
         });
     }

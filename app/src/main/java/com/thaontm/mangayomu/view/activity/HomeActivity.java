@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.thaontm.mangayomu.R;
@@ -25,13 +26,12 @@ import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener {
+public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener, KakalotMangaProvider.KakalotMangaProviderListener {
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private MaterialSearchView searchView;
-    private List<Fragment> fragments;
     private KakalotMangaProvider kakalotMangaProvider;
     private MangaOverviewFragment newMangaOverviewFragment;
     private MangaOverviewFragment popularMangaOverviewFragment;
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         setContentView(R.layout.activity_home);
         newMangaOverviewFragment = new MangaOverviewFragment();
         popularMangaOverviewFragment = new MangaOverviewFragment();
-        kakalotMangaProvider = new KakalotMangaProvider();
+        kakalotMangaProvider = new KakalotMangaProvider(this);
 
         // init BusyIndicator
         mBusyIndicatorManager = new BusyIndicatorManager(this);
@@ -149,6 +149,19 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             }
         });
 
+    }
+
+    @Override
+    public void onParsingError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mBusyIndicatorManager != null && mBusyIndicatorManager.isBusyIndicatorShowing()) {
+                    mBusyIndicatorManager.hideBusyIndicator();
+                }
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

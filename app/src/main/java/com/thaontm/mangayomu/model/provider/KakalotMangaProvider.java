@@ -25,6 +25,12 @@ import java.util.List;
 
 public class KakalotMangaProvider implements MangaProvider {
 
+    private KakalotMangaProviderListener kakalotMangaProviderListener;
+
+    public KakalotMangaProvider(KakalotMangaProviderListener listener) {
+        this.kakalotMangaProviderListener = listener;
+    }
+
     @Override
     public void getHome(final Callback<MangaHome> callback) {
         final String url = "http://mangakakalot.com/";
@@ -37,61 +43,61 @@ public class KakalotMangaProvider implements MangaProvider {
                 Document document = null;
                 try {
                     document = Jsoup.connect(url).get();
+                    Element element = document.getElementById("contentstory");
+                    Elements divElement = element.getElementsByClass("doreamon");
+                    Elements classElements = element.getElementsByClass("cover");
+                    Element divElement2 = classElements.first();
+                    Elements detailElements = divElement2.select("a[href]");
+                    String baseUrl = detailElements.attr("href");
+                    Element rootElement = divElement.first();
 
+                    for (Element element2 : rootElement.children()) {
+                        Elements elements = element2.select("a[href]");
+                        MangaOverview newMangaOverview = new MangaOverview();
+                        if (elements.size() > 1) {
+                            Element cover = elements.first().child(0);
+                            Element title = elements.get(1);
+                            String image = cover.attr("src");
+                            String name = title.text();
+                            newMangaOverview.setImageUrl(image);
+                            newMangaOverview.setTitle(name);
+                            newMangaOverview.setBaseUrl(getBaseUrl(element2));
+                            newMangas.add(newMangaOverview);
+                        }
+
+                    }
+
+                    Element popularElement = document.getElementById("owl-demo");
+                    Elements elements = popularElement.getElementsByClass("item");
+
+                    for (Element element3 : popularElement.children()) {
+                        MangaOverview popularMangaOverview = new MangaOverview();
+
+                        Elements elements1 = element3.select("a[href]");
+                        if (elements1.size() > 1) {
+                            Element cover = element3.child(0);
+                            Element name = elements1.get(0);
+                            Element chapter = elements1.get(1);
+
+                            String image = cover.attr("src");
+                            String title = name.text() + " " + chapter.text();
+                            popularMangaOverview.setImageUrl(image);
+                            popularMangaOverview.setTitle(title);
+                            popularMangaOverview.setBaseUrl(getBaseUrl(element));
+                            popularMangas.add(popularMangaOverview);
+                        }
+
+                    }
+                    MangaHome mangaHome = new MangaHome();
+                    mangaHome.setNewMangas(newMangas);
+                    mangaHome.setPopularMangas(popularMangas);
+                    MangaInfo mangaInfo = new MangaInfo();
+                    mangaInfo.setBaseUrl(baseUrl);
+                    callback.onSuccess(mangaHome);
                 } catch (IOException e) {
+                    kakalotMangaProviderListener.onParsingError();
                     e.printStackTrace();
                 }
-                Element element = document.getElementById("contentstory");
-                Elements divElement = element.getElementsByClass("doreamon");
-                Elements classElements = element.getElementsByClass("cover");
-                Element divElement2 = classElements.first();
-                Elements detailElements = divElement2.select("a[href]");
-                String baseUrl = detailElements.attr("href");
-                Element rootElement = divElement.first();
-
-                for (Element element2 : rootElement.children()) {
-                    Elements elements = element2.select("a[href]");
-                    MangaOverview newMangaOverview = new MangaOverview();
-                    if (elements.size() > 1) {
-                        Element cover = elements.first().child(0);
-                        Element title = elements.get(1);
-                        String image = cover.attr("src");
-                        String name = title.text();
-                        newMangaOverview.setImageUrl(image);
-                        newMangaOverview.setTitle(name);
-                        newMangaOverview.setBaseUrl(getBaseUrl(element2));
-                        newMangas.add(newMangaOverview);
-                    }
-
-                }
-
-                Element popularElement = document.getElementById("owl-demo");
-                Elements elements = popularElement.getElementsByClass("item");
-
-                for (Element element3 : popularElement.children()) {
-                    MangaOverview popularMangaOverview = new MangaOverview();
-
-                    Elements elements1 = element3.select("a[href]");
-                    if (elements1.size() > 1) {
-                        Element cover = element3.child(0);
-                        Element name = elements1.get(0);
-                        Element chapter = elements1.get(1);
-
-                        String image = cover.attr("src");
-                        String title = name.text() + " " + chapter.text();
-                        popularMangaOverview.setImageUrl(image);
-                        popularMangaOverview.setTitle(title);
-                        popularMangaOverview.setBaseUrl(getBaseUrl(element));
-                        popularMangas.add(popularMangaOverview);
-                    }
-
-                }
-                MangaHome mangaHome = new MangaHome();
-                mangaHome.setNewMangas(newMangas);
-                mangaHome.setPopularMangas(popularMangas);
-                MangaInfo mangaInfo = new MangaInfo();
-                mangaInfo.setBaseUrl(baseUrl);
-                callback.onSuccess(mangaHome);
             }
         }).start();
 
@@ -289,4 +295,7 @@ public class KakalotMangaProvider implements MangaProvider {
         return baseUrlElements.attr("href");
     }
 
+    public interface KakalotMangaProviderListener {
+        void onParsingError();
+    }
 }

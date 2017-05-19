@@ -45,7 +45,7 @@ import retrofit2.Response;
 
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
-public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor {
+public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor, KakalotMangaProvider.KakalotMangaProviderListener {
     @BindView(R.id.image_page)
     ImageView mImageView;
     @BindView(R.id.llReadManga)
@@ -69,7 +69,7 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         ButterKnife.bind(this);
 
         MangaChapter mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
-        kakalotMangaProvider = new KakalotMangaProvider();
+        kakalotMangaProvider = new KakalotMangaProvider(this);
         kakalotMangaProvider.getMangaChapterImages(mangaChapter.getBaseUrl(), new Callback<List<ChapterImage>>() {
             @Override
             public void onSuccess(final List<ChapterImage> result) {
@@ -259,6 +259,16 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                 } else {
                     Toast.makeText(ReadMangaActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    @Override
+    public void onParsingError() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
             }
         });
     }
