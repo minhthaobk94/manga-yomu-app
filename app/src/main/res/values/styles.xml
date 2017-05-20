@@ -26,12 +26,17 @@
         <item name="android:windowBackground">@color/primary</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/primary_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/status_bar_color</item>
+        <item name="android:textColor">@color/primary_text</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/primary_dark</item>
         <item name="android:actionBarTabBarStyle">@color/primary_dark</item>
     </style>
-
+    
+    <style name="CollapsingToolbarLayout_CollapsedTitleTextAppearance">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -6,6 +6,7 @@
     android:name="com.thaontm.mangayomu.view.fragment.ChapterFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_manga_chapter_list"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.thaontm.mangayomu.view.fragment.MangaChapterFragment"
     tools:listitem="@layout/fragment_chapter" />

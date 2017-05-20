@@ -138,6 +138,7 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
 
         // set up snackbar
         snackbar = Snackbar.make(llReadManga, "Text", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction(R.string.close, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,11 +146,13 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
             }
         });
         View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundColor(getResources().getColor(R.color.snackbar_background));
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
         params.gravity = Gravity.TOP;
         snackbarView.setLayoutParams(params);
         TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setMaxLines(5);
+        textView.setTextColor(getResources().getColor(R.color.primary));
     }
 
     @Override

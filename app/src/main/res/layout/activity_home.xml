@@ -21,7 +21,9 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/tool_bar_height" />
+                android:layout_height="@dimen/tool_bar_height"
+                app:subtitleTextColor="@color/primary_text"
+                app:titleTextColor="@color/primary_text" />
 
             <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/search_view"
@@ -42,10 +44,12 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/tab_layout_background_color"
             app:tabGravity="fill"
-            app:tabMode="fixed">
-
-        </android.support.design.widget.TabLayout>
+            app:tabIndicatorColor="@color/tab_layout_indicator_color"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/tab_layout_selected_text_color"
+            app:tabTextColor="@color/tab_layout_text_color" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"

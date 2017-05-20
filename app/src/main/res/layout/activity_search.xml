@@ -21,7 +21,9 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/tool_bar_height" />
+                android:layout_height="@dimen/tool_bar_height"
+                app:subtitleTextColor="@color/primary_text"
+                app:titleTextColor="@color/primary_text" />
 
             <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/search_view"
@@ -34,7 +36,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/activity_search_background"
         android:orientation="vertical">
 
         <TextView
@@ -42,19 +45,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="@dimen/padding_standard"
             android:text="@string/no_items_found"
+            android:textColor="@color/white"
             android:textSize="@dimen/primary_text_size"
             android:visibility="gone" />
 
-    </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.thaontm.mangayomu.view.activity.SearchActivity"
+            tools:listitem="@layout/item_search_manga"></android.support.v7.widget.RecyclerView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.thaontm.mangayomu.view.activity.SearchActivity"
-        tools:listitem="@layout/item_search_manga"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
 
 </LinearLayout>

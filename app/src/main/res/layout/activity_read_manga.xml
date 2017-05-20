@@ -21,7 +21,7 @@
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/primary_dark"
+        android:background="@color/bottom_bar_color"
         app:bb_activeTabColor="@color/white"
         app:bb_behavior="iconsOnly"
         app:bb_inActiveTabColor="@color/white"

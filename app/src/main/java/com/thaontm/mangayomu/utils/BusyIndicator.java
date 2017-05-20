@@ -47,6 +47,4 @@ public class BusyIndicator extends Dialog {
     }
 
     //endregion
-
 }
-

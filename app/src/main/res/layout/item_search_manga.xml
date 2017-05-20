@@ -42,13 +42,15 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="start"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/newest_chapter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start" />
+                android:gravity="start"
+                android:textColor="@color/light_white" />
 
         </LinearLayout>
 

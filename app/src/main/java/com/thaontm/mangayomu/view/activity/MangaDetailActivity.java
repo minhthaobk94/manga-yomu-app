@@ -87,7 +87,7 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
         // toolbar
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
+        mToolbar.setNavigationIcon(R.drawable.ic_left_arrow_dark);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
