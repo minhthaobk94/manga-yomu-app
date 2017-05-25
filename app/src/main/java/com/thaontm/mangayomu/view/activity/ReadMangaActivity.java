@@ -52,11 +52,9 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
     @BindView(R.id.llReadManga)
     LinearLayout llReadManga;
     Snackbar snackbar;
-
-    private BusyIndicatorManager mBusyIndicatorManager;
-
     boolean isActionDown = false, isActionUp = false;
     float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+    private BusyIndicatorManager mBusyIndicatorManager;
     private TextRecognizer detector;
     private BottomBar bottomNavigationView;
     private List<ChapterImage> chapterImages;
@@ -187,7 +185,6 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                 Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getApplicationContext(), "Loading image success !", Toast.LENGTH_SHORT).show();
                         mBusyIndicatorManager.hideBusyIndicator();
                     }
 
@@ -210,7 +207,6 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                 Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView, new com.squareup.picasso.Callback() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getApplicationContext(), "Loading image success !", Toast.LENGTH_SHORT).show();
                         mBusyIndicatorManager.hideBusyIndicator();
                     }
 
