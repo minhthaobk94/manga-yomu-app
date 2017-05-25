@@ -25,10 +25,7 @@ import java.util.List;
 
 public class KakalotMangaProvider implements MangaProvider {
 
-    private KakalotMangaProviderListener kakalotMangaProviderListener;
-
-    public KakalotMangaProvider(KakalotMangaProviderListener listener) {
-        this.kakalotMangaProviderListener = listener;
+    public KakalotMangaProvider() {
     }
 
     @Override
@@ -95,7 +92,7 @@ public class KakalotMangaProvider implements MangaProvider {
                     mangaInfo.setBaseUrl(baseUrl);
                     callback.onSuccess(mangaHome);
                 } catch (IOException e) {
-                    kakalotMangaProviderListener.onParsingError();
+                    callback.onError(new Exception("Check your internet connection !"));
                     e.printStackTrace();
                 }
             }
@@ -132,7 +129,7 @@ public class KakalotMangaProvider implements MangaProvider {
                     mangaDetail.setBaseUrl(url);
                     callback.onSuccess(mangaDetail);
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                    callback.onError(new Exception("Check your internet connection !"));
                     e.printStackTrace();
                 }
 
@@ -168,10 +165,10 @@ public class KakalotMangaProvider implements MangaProvider {
                         }
 
                     }
-
                     callback.onSuccess(mangaChapters);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    callback.onError(new Exception("Check your internet connection !"));
                 }
 
 
@@ -189,20 +186,21 @@ public class KakalotMangaProvider implements MangaProvider {
                 Document document = null;
                 try {
                     document = Jsoup.connect(url).get();
+                    Element element = document.getElementById("vungdoc");
+                    Elements imgs = element.children();
+                    List<ChapterImage> chapterImages = new ArrayList<>();
+                    for (int i = 0; i < imgs.size(); i++) {
+                        ChapterImage chapterImage = new ChapterImage();
+                        Element image = imgs.get(i);
+                        String imageUrl = image.attr("src");
+                        chapterImage.setBaseUrl(imageUrl);
+                        chapterImages.add(chapterImage);
+                    }
+                    callback.onSuccess(chapterImages);
                 } catch (IOException e) {
+                    callback.onError(new Exception("Check your internet connection !"));
                     e.printStackTrace();
                 }
-                Element element = document.getElementById("vungdoc");
-                Elements imgs = element.children();
-                List<ChapterImage> chapterImages = new ArrayList<>();
-                for (int i = 0; i < imgs.size(); i++) {
-                    ChapterImage chapterImage = new ChapterImage();
-                    Element image = imgs.get(i);
-                    String imageUrl = image.attr("src");
-                    chapterImage.setBaseUrl(imageUrl);
-                    chapterImages.add(chapterImage);
-                }
-                callback.onSuccess(chapterImages);
             }
         }).start();
 
@@ -218,31 +216,32 @@ public class KakalotMangaProvider implements MangaProvider {
             public void run() {
                 try {
                     document = Jsoup.connect("http://mangakakalot.com/search/" + keyword).get();
+                    Elements mangaElements = document.getElementsByClass("item-name");
+                    Elements mangaUrlElements = mangaElements.select("a[href]");
+                    Elements chapterElements = document.getElementsByClass("item-chapter");
+
+                    List<SearchedManga> searchedMangas = new ArrayList<>();
+                    for (int i = 0; i < mangaUrlElements.size(); i++) {
+                        if (mangaUrlElements.size() > 0) {
+                            Element searchMangaElement = mangaUrlElements.get(i);
+                            String mangaUrl = searchMangaElement.select("a").attr("href");
+                            String mangaTitle = searchMangaElement.text();
+
+                            Element chapter = chapterElements.get(i);
+                            String newestChapter = chapter.attr("title");
+
+                            SearchedManga searchedManga = new SearchedManga();
+                            searchedManga.setBaseUrl(mangaUrl);
+                            searchedManga.setTitle(mangaTitle);
+                            searchedManga.setNewestChapter(newestChapter);
+                            searchedMangas.add(searchedManga);
+                        }
+                    }
+                    callback.onSuccess(searchedMangas);
                 } catch (IOException e) {
+                    callback.onError(new Exception());
                     e.printStackTrace();
                 }
-                Elements mangaElements = document.getElementsByClass("item-name");
-                Elements mangaUrlElements = mangaElements.select("a[href]");
-                Elements chapterElements = document.getElementsByClass("item-chapter");
-
-                List<SearchedManga> searchedMangas = new ArrayList<>();
-                for (int i = 0; i < mangaUrlElements.size(); i++) {
-                    if (mangaUrlElements.size() > 0) {
-                        Element searchMangaElement = mangaUrlElements.get(i);
-                        String mangaUrl = searchMangaElement.select("a").attr("href");
-                        String mangaTitle = searchMangaElement.text();
-
-                        Element chapter = chapterElements.get(i);
-                        String newestChapter = chapter.attr("title");
-
-                        SearchedManga searchedManga = new SearchedManga();
-                        searchedManga.setBaseUrl(mangaUrl);
-                        searchedManga.setTitle(mangaTitle);
-                        searchedManga.setNewestChapter(newestChapter);
-                        searchedMangas.add(searchedManga);
-                    }
-                }
-                callback.onSuccess(searchedMangas);
             }
         }).start();
     }
@@ -293,9 +292,5 @@ public class KakalotMangaProvider implements MangaProvider {
     private String getBaseUrl(Element element) {
         Elements baseUrlElements = element.getElementsByClass("itemupdate first").get(0).child(0).select("a[href]");
         return baseUrlElements.attr("href");
-    }
-
-    public interface KakalotMangaProviderListener {
-        void onParsingError();
     }
 }

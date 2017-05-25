@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
  * Copyright thao 2017.
  */
 
-public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, KakalotMangaProvider.KakalotMangaProviderListener {
+public class MangaDetailActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener {
 
     static final String MANGA_DETAIL = "manga_detail";
     static final String CHAPTER = "manga_chapter";
@@ -61,7 +61,7 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
         Picasso.with(this).load(mangaDetail.getImageUrl()).fit().into(mMangaImage);
         mangaChapterFragment = new MangaChapterFragment();
 
-        kakalotMangaProvider = new KakalotMangaProvider(this);
+        kakalotMangaProvider = new KakalotMangaProvider();
         kakalotMangaProvider.getMangaChapters(mangaDetail.getBaseUrl(), new Callback<List<MangaChapter>>() {
             @Override
             public void onSuccess(final List<MangaChapter> result) {
@@ -75,7 +75,12 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
 
             @Override
             public void onError(Throwable what) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -146,16 +151,6 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
                     collapsingToolbar.setTitle(" ");
                     isShow = false;
                 }
-            }
-        });
-    }
-
-    @Override
-    public void onParsingError() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
             }
         });
     }

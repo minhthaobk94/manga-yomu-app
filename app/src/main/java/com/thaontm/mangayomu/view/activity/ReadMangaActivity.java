@@ -33,6 +33,7 @@ import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
 import com.thaontm.mangayomu.rest.ApiClient;
 import com.thaontm.mangayomu.rest.ApiInterface;
+import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.utils.StringUtils;
 import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 
@@ -45,12 +46,14 @@ import retrofit2.Response;
 
 import static com.thaontm.mangayomu.view.activity.MangaDetailActivity.CHAPTER;
 
-public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor, KakalotMangaProvider.KakalotMangaProviderListener {
+public class ReadMangaActivity extends AppCompatActivity implements MangaChapterFragment.OnListFragmentInteractionListener, TabSelectionInterceptor {
     @BindView(R.id.image_page)
     ImageView mImageView;
     @BindView(R.id.llReadManga)
     LinearLayout llReadManga;
     Snackbar snackbar;
+
+    private BusyIndicatorManager mBusyIndicatorManager;
 
     boolean isActionDown = false, isActionUp = false;
     float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
@@ -68,8 +71,12 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         setContentView(R.layout.activity_read_manga);
         ButterKnife.bind(this);
 
+        mBusyIndicatorManager = new BusyIndicatorManager(this);
+
         MangaChapter mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
-        kakalotMangaProvider = new KakalotMangaProvider(this);
+        kakalotMangaProvider = new KakalotMangaProvider();
+        // show busy indicator
+        mBusyIndicatorManager.showBusyIndicator();
         kakalotMangaProvider.getMangaChapterImages(mangaChapter.getBaseUrl(), new Callback<List<ChapterImage>>() {
             @Override
             public void onSuccess(final List<ChapterImage> result) {
@@ -79,6 +86,8 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                         chapterImages = result;
                         chapterImage = chapterImages.get(currentIndex);
                         Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView);
+                        // hide busy indicator
+                        mBusyIndicatorManager.hideBusyIndicator();
 
                     }
                 });
@@ -86,7 +95,14 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
 
             @Override
             public void onError(Throwable what) {
-
+                // hide busyIndicator
+                mBusyIndicatorManager.hideBusyIndicator();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         bottomNavigationView = (BottomBar) findViewById(R.id.bottom_navigation_bar);
@@ -164,18 +180,49 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         if (newTabId == R.id.action_previous) {
             // close Snackbar
             closeSnackBar();
+            // show busy indicator
+            mBusyIndicatorManager.showBusyIndicator();
             if (currentIndex > 0) {
                 chapterImage = chapterImages.get(--currentIndex);
-                Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView);
+                Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getApplicationContext(), "Loading image success !", Toast.LENGTH_SHORT).show();
+                        mBusyIndicatorManager.hideBusyIndicator();
+                    }
 
+                    @Override
+                    public void onError() {
+                        Toast.makeText(getApplicationContext(), "Loading image error !", Toast.LENGTH_SHORT).show();
+                        mBusyIndicatorManager.hideBusyIndicator();
+                    }
+                });
+            } else {
+                mBusyIndicatorManager.hideBusyIndicator();
             }
         } else if (newTabId == R.id.action_forward) {
             // close Snackbar
             closeSnackBar();
+            // show busy indicator
+            mBusyIndicatorManager.showBusyIndicator();
             if (currentIndex < chapterImages.size() - 1) {
                 chapterImage = chapterImages.get(++currentIndex);
-                Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView);
+                Picasso.with(ReadMangaActivity.this).load(chapterImage.getBaseUrl()).fit().into(mImageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getApplicationContext(), "Loading image success !", Toast.LENGTH_SHORT).show();
+                        mBusyIndicatorManager.hideBusyIndicator();
+                    }
 
+                    @Override
+                    public void onError() {
+                        Toast.makeText(getApplicationContext(), "Loading image error !", Toast.LENGTH_SHORT).show();
+                        mBusyIndicatorManager.hideBusyIndicator();
+
+                    }
+                });
+            } else {
+                mBusyIndicatorManager.hideBusyIndicator();
             }
         } else if (newTabId == R.id.action_home) {
             Intent intent = new Intent(this, HomeActivity.class);
@@ -195,6 +242,7 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
     protected void onPause() {
         super.onPause();
         closeSnackBar();
+        mBusyIndicatorManager.hideBusyIndicator();
     }
 
     /*
@@ -262,16 +310,6 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
                 } else {
                     Toast.makeText(ReadMangaActivity.this, "Cannot translate", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-    }
-
-    @Override
-    public void onParsingError() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
             }
         });
     }

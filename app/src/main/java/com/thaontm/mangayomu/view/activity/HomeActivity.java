@@ -26,7 +26,7 @@ import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener, KakalotMangaProvider.KakalotMangaProviderListener {
+public class HomeActivity extends AppCompatActivity implements MangaOverviewFragment.OnMangaOverviewInteractionListener {
 
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         setContentView(R.layout.activity_home);
         newMangaOverviewFragment = new MangaOverviewFragment();
         popularMangaOverviewFragment = new MangaOverviewFragment();
-        kakalotMangaProvider = new KakalotMangaProvider(this);
+        kakalotMangaProvider = new KakalotMangaProvider();
 
         // init BusyIndicator
         mBusyIndicatorManager = new BusyIndicatorManager(this);
@@ -77,6 +77,14 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (mBusyIndicatorManager != null) {
+            mBusyIndicatorManager.hideBusyIndicator();
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         // show loading
@@ -100,6 +108,13 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
             public void onError(Throwable what) {
                 // hide loading
                 mBusyIndicatorManager.hideBusyIndicator();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -145,23 +160,15 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
             @Override
             public void onError(Throwable what) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
-    }
-
-    @Override
-    public void onParsingError() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (mBusyIndicatorManager != null && mBusyIndicatorManager.isBusyIndicatorShowing()) {
-                    mBusyIndicatorManager.hideBusyIndicator();
-                }
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -25,7 +25,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener, KakalotMangaProvider.KakalotMangaProviderListener {
+public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener {
     static final String KEYWORD = "keyword";
     private RecyclerView recyclerView = null;
     private KakalotMangaProvider kakalotMangaProvider;
@@ -40,7 +40,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         recyclerView = ButterKnife.findById(this, R.id.list);
-        kakalotMangaProvider = new KakalotMangaProvider(this);
+        kakalotMangaProvider = new KakalotMangaProvider();
         tvNoItemsFound = (TextView) findViewById(R.id.tvNoItemsFound);
 
         // init BusyIndicatorManager
@@ -68,6 +68,14 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
             @Override
             public void onError(Throwable what) {
+                // hide loading indicator
+                busyIndicatorManager.hideBusyIndicator();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -112,6 +120,12 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
                     @Override
                     public void onError(Throwable what) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
                 return false;
@@ -122,6 +136,14 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (busyIndicatorManager != null) {
+            busyIndicatorManager.hideBusyIndicator();
+        }
     }
 
     @Override
@@ -161,16 +183,12 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
             @Override
             public void onError(Throwable what) {
-            }
-        });
-    }
-
-    @Override
-    public void onParsingError() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.NETWORK_ERR_MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
