@@ -30,7 +30,8 @@ import com.thaontm.mangayomu.model.bean.TouchInfo;
 import com.thaontm.mangayomu.model.bean.translation.Translation;
 import com.thaontm.mangayomu.model.bean.translation.TranslationResponse;
 import com.thaontm.mangayomu.model.provider.Callback;
-import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProviderFactory;
 import com.thaontm.mangayomu.rest.ApiClient;
 import com.thaontm.mangayomu.rest.ApiInterface;
 import com.thaontm.mangayomu.utils.BusyIndicatorManager;
@@ -59,7 +60,7 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
     private BottomBar bottomNavigationView;
     private List<ChapterImage> chapterImages;
     private ChapterImage chapterImage;
-    private KakalotMangaProvider kakalotMangaProvider;
+    private MangaProvider mangaProvider;
     private int currentIndex = 0;
     private SparseArray<TextBlock> recognizedTextBlocks;
 
@@ -72,10 +73,10 @@ public class ReadMangaActivity extends AppCompatActivity implements MangaChapter
         mBusyIndicatorManager = new BusyIndicatorManager(this);
 
         MangaChapter mangaChapter = (MangaChapter) getIntent().getSerializableExtra(CHAPTER);
-        kakalotMangaProvider = new KakalotMangaProvider();
+        mangaProvider = MangaProviderFactory.getInstance().getMangaProvider();
         // show busy indicator
         mBusyIndicatorManager.showBusyIndicator();
-        kakalotMangaProvider.getMangaChapterImages(mangaChapter.getBaseUrl(), new Callback<List<ChapterImage>>() {
+        mangaProvider.getMangaChapterImages(mangaChapter.getBaseUrl(), new Callback<List<ChapterImage>>() {
             @Override
             public void onSuccess(final List<ChapterImage> result) {
                 runOnUiThread(new Runnable() {

@@ -19,7 +19,8 @@ import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.model.provider.Callback;
-import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProviderFactory;
 import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.view.fragment.MangaOverviewFragment;
 
@@ -32,7 +33,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private MaterialSearchView searchView;
-    private KakalotMangaProvider kakalotMangaProvider;
+    private MangaProvider mangaProvider;
     private MangaOverviewFragment newMangaOverviewFragment;
     private MangaOverviewFragment popularMangaOverviewFragment;
 
@@ -44,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         setContentView(R.layout.activity_home);
         newMangaOverviewFragment = new MangaOverviewFragment();
         popularMangaOverviewFragment = new MangaOverviewFragment();
-        kakalotMangaProvider = new KakalotMangaProvider();
+        mangaProvider = MangaProviderFactory.getInstance().getMangaProvider();
 
         // init BusyIndicator
         mBusyIndicatorManager = new BusyIndicatorManager(this);
@@ -90,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         // show loading
         mBusyIndicatorManager.showBusyIndicator();
         // get data
-        kakalotMangaProvider.getHome(new Callback<MangaHome>() {
+        mangaProvider.getHome(new Callback<MangaHome>() {
             @Override
             public void onSuccess(final MangaHome result) {
                 // hide loading
@@ -145,7 +146,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
 
     @Override
     public void onMangaOverviewInteraction(MangaOverview item) {
-        kakalotMangaProvider.getMangaDetail(item.getBaseUrl(), new Callback<MangaDetail>() {
+        mangaProvider.getMangaDetail(item.getBaseUrl(), new Callback<MangaDetail>() {
             @Override
             public void onSuccess(final MangaDetail result) {
                 runOnUiThread(new Runnable() {

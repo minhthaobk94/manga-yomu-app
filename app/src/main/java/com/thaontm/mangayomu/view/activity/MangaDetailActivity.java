@@ -18,7 +18,8 @@ import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaChapter;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.provider.Callback;
-import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProviderFactory;
 import com.thaontm.mangayomu.view.fragment.MangaChapterFragment;
 import com.thaontm.mangayomu.view.fragment.MangaDetailFragment;
 
@@ -49,7 +50,7 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
     private MangaChapterFragment mangaChapterFragment;
     private MangaDetail mangaDetail;
     private MangaChapter mangaChapter;
-    private KakalotMangaProvider kakalotMangaProvider;
+    private MangaProvider mangaProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +62,8 @@ public class MangaDetailActivity extends AppCompatActivity implements MangaChapt
         Picasso.with(this).load(mangaDetail.getImageUrl()).fit().into(mMangaImage);
         mangaChapterFragment = new MangaChapterFragment();
 
-        kakalotMangaProvider = new KakalotMangaProvider();
-        kakalotMangaProvider.getMangaChapters(mangaDetail.getBaseUrl(), new Callback<List<MangaChapter>>() {
+        mangaProvider = MangaProviderFactory.getInstance().getMangaProvider();
+        mangaProvider.getMangaChapters(mangaDetail.getBaseUrl(), new Callback<List<MangaChapter>>() {
             @Override
             public void onSuccess(final List<MangaChapter> result) {
                 runOnUiThread(new Runnable() {

@@ -17,7 +17,8 @@ import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
 import com.thaontm.mangayomu.model.bean.SearchedManga;
 import com.thaontm.mangayomu.model.provider.Callback;
-import com.thaontm.mangayomu.model.provider.KakalotMangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProvider;
+import com.thaontm.mangayomu.model.provider.MangaProviderFactory;
 import com.thaontm.mangayomu.utils.BusyIndicatorManager;
 import com.thaontm.mangayomu.view.fragment.MySearchMangaRecyclerViewAdapter;
 
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
 public class SearchActivity extends AppCompatActivity implements MySearchMangaRecyclerViewAdapter.OnItemClickListener {
     static final String KEYWORD = "keyword";
     private RecyclerView recyclerView = null;
-    private KakalotMangaProvider kakalotMangaProvider;
+    private MangaProvider mangaProvider;
 
     private Toolbar mToolbar;
     private MaterialSearchView searchView;
@@ -40,7 +41,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         recyclerView = ButterKnife.findById(this, R.id.list);
-        kakalotMangaProvider = new KakalotMangaProvider();
+        mangaProvider = MangaProviderFactory.getInstance().getMangaProvider();
         tvNoItemsFound = (TextView) findViewById(R.id.tvNoItemsFound);
 
         // init BusyIndicatorManager
@@ -52,7 +53,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
         //// search
         final Intent intent = getIntent();
         String keyword = intent.getStringExtra(KEYWORD);
-        kakalotMangaProvider.search(keyword, new Callback<List<SearchedManga>>() {
+        mangaProvider.search(keyword, new Callback<List<SearchedManga>>() {
             @Override
             public void onSuccess(final List<SearchedManga> result) {
                 // hide loading indicator
@@ -104,7 +105,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
                 //// show loading indicator
                 busyIndicatorManager.showBusyIndicator();
                 //// search
-                kakalotMangaProvider.search(query, new Callback<List<SearchedManga>>() {
+                mangaProvider.search(query, new Callback<List<SearchedManga>>() {
                     @Override
                     public void onSuccess(final List<SearchedManga> result) {
                         // hide loading indicator
@@ -168,7 +169,7 @@ public class SearchActivity extends AppCompatActivity implements MySearchMangaRe
 
     @Override
     public void onItemClick(MangaOverview mangaOverview) {
-        kakalotMangaProvider.getMangaDetail(mangaOverview.getBaseUrl(), new Callback<MangaDetail>() {
+        mangaProvider.getMangaDetail(mangaOverview.getBaseUrl(), new Callback<MangaDetail>() {
             @Override
             public void onSuccess(final MangaDetail result) {
                 runOnUiThread(new Runnable() {
