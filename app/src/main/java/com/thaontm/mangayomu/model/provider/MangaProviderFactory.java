@@ -5,7 +5,7 @@ public class MangaProviderFactory {
     private MangaProvider mangaProvider;
 
     private MangaProviderFactory () {
-        mangaProvider = new KakalotMangaProvider();
+        mangaProvider = new MangaParkProvider();
     }
 
     public static MangaProviderFactory getInstance() {
