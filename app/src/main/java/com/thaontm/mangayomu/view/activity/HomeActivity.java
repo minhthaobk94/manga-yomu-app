@@ -1,5 +1,6 @@
 package com.thaontm.mangayomu.view.activity;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,15 +10,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.pixplicity.easyprefs.library.Prefs;
 import com.thaontm.mangayomu.R;
 import com.thaontm.mangayomu.model.bean.MangaDetail;
 import com.thaontm.mangayomu.model.bean.MangaHome;
 import com.thaontm.mangayomu.model.bean.MangaOverview;
+import com.thaontm.mangayomu.model.bean.ProviderConstants;
 import com.thaontm.mangayomu.model.provider.Callback;
 import com.thaontm.mangayomu.model.provider.MangaProvider;
 import com.thaontm.mangayomu.model.provider.MangaProviderFactory;
@@ -43,6 +49,15 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Initialize the Prefs class
+        new Prefs.Builder()
+                .setContext(this)
+                .setMode(ContextWrapper.MODE_PRIVATE)
+                .setPrefsName(getPackageName())
+                .setUseDefaultSharedPreference(true)
+                .build();
+
         newMangaOverviewFragment = new MangaOverviewFragment();
         popularMangaOverviewFragment = new MangaOverviewFragment();
         mangaProvider = MangaProviderFactory.getInstance().getMangaProvider();
@@ -56,6 +71,7 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(mViewPager);
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        registerForContextMenu(mToolbar);
         mTabLayout.setupWithViewPager(mViewPager);
 
         // search view
@@ -75,6 +91,43 @@ public class HomeActivity extends AppCompatActivity implements MangaOverviewFrag
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_changing_provider, menu);
+
+        if (Prefs.getInt(ProviderConstants.CURRENT_PROVIDER, ProviderConstants.KAKALOT_PROVIDER) == ProviderConstants.MANGAPARK_PROVIDER) {
+            menu.findItem(R.id.manga_park_provider).setChecked(true);
+            menu.findItem(R.id.kakalot_provider).setChecked(false);
+        } else {
+            menu.findItem(R.id.manga_park_provider).setChecked(false);
+            menu.findItem(R.id.kakalot_provider).setChecked(true);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        item.setChecked(true);
+        switch (item.getItemId()) {
+            case R.id.kakalot_provider:
+                Prefs.putInt(ProviderConstants.CURRENT_PROVIDER, ProviderConstants.KAKALOT_PROVIDER);
+                break;
+            case R.id.manga_park_provider:
+                Prefs.putInt(ProviderConstants.CURRENT_PROVIDER, ProviderConstants.MANGAPARK_PROVIDER);
+                break;
+        }
+
+        // change provider
+        MangaProviderFactory.getInstance().changeProvider();
+
+        // relaunch app
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
+        return true;
     }
 
     @Override
